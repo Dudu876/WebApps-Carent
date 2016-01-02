@@ -28,7 +28,7 @@ exports.getCarById = function (req, res) {
 exports.updateCar = function (req, res) {
     Car.findById(req.params.car_id, function (err, car) {
         if (!err) {
-            car.name = req.body.name;
+            car.number = req.body.number;
 
             car.save(function (err) {
                 if (!err) {
@@ -59,7 +59,9 @@ exports.deleteCar = function (req, res) {
 
 exports.createCar = function (req, res) {
     var car = new Car();
-    car.name = req.body.name;
+    car.number = req.body.number;
+    car.type.manufacturer = req.body.manufacturer;
+    car.type.model = req.body.model;
 
     car.save(function (err) {
         if (!err) {

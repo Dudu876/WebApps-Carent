@@ -7,7 +7,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var carSchema = new Schema({
-    name: String
+    number: Number,
+    type: { manufacturer: String, model: String },
+    branch: { type: Schema.ObjectId, ref: 'branchSchema' }
 });
 
 // define our car model
