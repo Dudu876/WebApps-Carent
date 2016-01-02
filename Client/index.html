@@ -7,11 +7,11 @@
     <title>Carent</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../public/libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/libs/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/stylesheets/style.css"> <!-- custom styles -->
 
     <!-- JS -->
-    <script src="../public/libs/angular/angular.min.js"></script>
+    <script src="public/libs/angular/angular.min.js"></script>
     <script src="public/libs/angular-route/angular-route.min.js"></script>
 
     <!-- ANGULAR CUSTOM -->
@@ -23,19 +23,18 @@
 
 </head>
 <body ng-app="carentApp" ng-controller="CarController">
+<!-- HEADER -->
+<nav class="navbar navbar-inverse">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/">Carent</a>
+    </div>
+
+    <!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
+    <ul class="nav navbar-nav">
+        <li><a href="/Cars">Cars</a></li>
+    </ul>
+</nav>
 <div class="container">
-
-    <!-- HEADER -->
-    <nav class="navbar navbar-inverse">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">Stencil: Node and Angular</a>
-        </div>
-
-        <!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
-        <ul class="nav navbar-nav">
-            <li><a href="/Cars">Cars</a></li>
-        </ul>
-    </nav>
 
     <!-- ANGULAR DYNAMIC CONTENT -->
     <div ng-view></div>
