@@ -7,13 +7,13 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 
     // home page
         .when('/', {
-            templateUrl: 'MainModule/HomeView.html',
+            templateUrl: 'views/carsAvailable.html',
             controller: 'MainController'
         })
 
         // cars page that will use the CarsController
         .when('/Cars', {
-            templateUrl: 'CarModule/CarView.html',
+            templateUrl: 'views/carsManager.html',
             controller: 'CarController'
         });
 
