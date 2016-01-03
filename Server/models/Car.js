@@ -8,7 +8,11 @@ var Schema = mongoose.Schema;
 
 var carSchema = new Schema({
     number: Number,
-    type: { manufacturer: String, model: String },
+    type: { manufacturer: String, model: String, year: Number},
+    category: String,
+    price: Number,
+    gearbox: String,
+    entryDate: Date,
     branch: { type: Schema.ObjectId, ref: 'branchSchema' }
 });
 
