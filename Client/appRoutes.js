@@ -4,17 +4,15 @@
 angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
     $routeProvider
-
-    // home page
+        // home page
         .when('/', {
             templateUrl: 'views/carsAvailable.html',
-            controller: 'MainController'
+            controller: 'carsAvailable'
         })
-
         // cars page that will use the CarsController
-        .when('/Cars', {
+        .when('/CarsManager', {
             templateUrl: 'views/carsManager.html',
-            controller: 'CarController'
+            controller: 'carsManager'
         });
 
     $locationProvider.html5Mode(true);

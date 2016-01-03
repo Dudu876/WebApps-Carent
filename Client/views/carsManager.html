@@ -1,5 +1,51 @@
-<div class="jumbotron text-center">
-    <h1>Cars and Proud</h1>
+<div ng-controller="carsManager" class="jumbotron text-center">
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+	הוסף רכב
+	</button>
+		
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
 
-    <p>{{ tagline }}</p>
+		  </div>
+		  <div class="modal-body">
+			...
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-primary">Save changes</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>מספר רכב</th>
+                <th>דגם</th>
+				<th>קטגוריה</th>
+                <th>שנה</th>
+				<th>תעריף</th>
+				<th>ת.הילוכים</th>
+				<th>תאריך כניסה</th>
+				<th></th>
+				<th></th>
+            </tr>
+        </thead>
+        <tbody>
+			<tr ng-repeat="car in cars">
+				<td>{{ car.number }}</td>
+				<td>{{ car.type.manufacturer }} - {{ car.type.model }}</td>
+				<td>{{ car.category }}</td>
+				<td>{{ car.type.year }}</td>
+				<td>{{ car.price }}</td>
+				<td>{{ car.gearbox }}</td>
+				<td>{{ car.entryDate }}</td>
+				<td>עריכה</td>
+				<td>מחיקה</td>
+			</tr>
+        </tbody>
+    </table>
+
 </div>
