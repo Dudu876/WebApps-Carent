@@ -23,7 +23,6 @@
 
     </style>
     <div id="map_canvas" style="height: 600px; width: 500px; float:left;">
-
     </div>
 <table>
     <tr>
@@ -41,13 +40,16 @@
 </table>
     <div id="branchDetails" class="collapse" role="form">
         <div class="form-horizontal">
-            <form novalidate>
+            <form>
                 <input type="hidden" ng-model="currentBranch.id">
-                Title: <br>
+                שם:
+                <br>
                 <input type="text" ng-model="currentBranch.title"><br>
-                Lat:<br>
+                Lat:
+                <br>
                 <input type="text" ng-model="currentBranch.lat">
-                Long:<br>
+                Long:
+                <br>
                 <input type="text" ng-model="currentBranch.long">
                 <input id="submitButton" type="submit" value="Add" />
             </form>

@@ -4,6 +4,7 @@
 var path = require('path');
 
 var carController = require('./controllers/Cars');
+var branchController = require('./controllers/Branches');
 
 module.exports = function (app) {
 
@@ -15,6 +16,9 @@ module.exports = function (app) {
         .get(carController.getCarById)
         .put(carController.updateCar)
         .delete(carController.deleteCar);
+
+    app.route('/api/branches/:branch_id')
+        .delete(branchController.deleteBranch);
 
     // route to handle all angular requests
     app.get('/', function (req, res) {
