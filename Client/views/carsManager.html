@@ -1,8 +1,7 @@
 <div ng-controller="carsManager" class="jumbotron text-center">
-	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-	הוסף רכב
+	<button style="margin-right: 91%;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+	Add new car
 	</button>
-		
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -22,13 +21,13 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>מספר רכב</th>
-                <th>דגם</th>
-				<th>קטגוריה</th>
-                <th>שנה</th>
-				<th>תעריף</th>
-				<th>ת.הילוכים</th>
-				<th>תאריך כניסה</th>
+                <th>Car number</th>
+                <th>Model</th>
+				<th>Category</th>
+                <th>Year</th>
+				<th>Price</th>
+				<th>Gearbox</th>
+				<th>Entry date</th>
 				<th></th>
 				<th></th>
             </tr>
@@ -42,8 +41,8 @@
 				<td>{{ car.price }}</td>
 				<td>{{ car.gearbox }}</td>
 				<td>{{ car.entryDate }}</td>
-				<td>עריכה</td>
-				<td>מחיקה</td>
+				<td>Edit</td>
+				<td>Delete</td>
 			</tr>
         </tbody>
     </table>
