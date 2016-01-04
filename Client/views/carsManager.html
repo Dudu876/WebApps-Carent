@@ -9,7 +9,60 @@
 
 		  </div>
 		  <div class="modal-body">
-			...
+			  <form>
+				  <div class="form-group">
+					  <label for="carNumberInput">Car number</label>
+					  <input type="text" class="form-control" id="carNumberInput" placeholder="Car Number">
+				  </div>
+				  <div class="form-group">
+					  <label for="carModelInput">Model</label>
+					  <input type="text" class="form-control" id="carModelInput" placeholder="Model">
+				  </div>
+				  <div class="form-group">
+					  <label for="carCategorySelect">Category</label>
+					  <select id="carCategorySelect" class="form-control">
+						  <option>A</option>
+						  <option>B</option>
+						  <option>C</option>
+					  </select>
+				  </div>
+				  <div class="form-group">
+					  <label for="carYearInput">Year</label>
+					  <p class="input-group" id="carYearInput">
+						  <input type="text" class="form-control" ng-model="dt"
+								 datepicker-popup="{{format}}" datepicker-options="{{datepickerOptions}}"
+								 is-open="opened" ng-focus="open($event)"
+								 date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"></input>
+							  <span class="input-group-btn">
+								<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+							  </span>
+					  </p>
+				  </div>
+				  <div class="form-group">
+					  <label for="carPriceInput">Price</label>
+					  <input type="number" class="form-control" id="carPriceInput" placeholder="Price">
+				  </div>
+				  <div class="form-group">
+					  <label for="carGearboxSelect">Gearbox</label>
+					  <select id="carGearboxSelect" class="form-control">
+						  <option>Manual</option>
+						  <option>Automatic</option>
+						  <option>Robotics</option>
+					  </select>
+				  </div>
+				  <div class="form-group">
+					  <label for="carEntryDateInput">Entry date</label>
+					  <p class="input-group" id="carEntryDateInput">
+						  <input type="text" class="form-control" ng-model="dt"
+								 datepicker-popup="{{formatEntryDate}}" datepicker-options="{{datepickerEntryOptions}}"
+								 is-open="openedEntryDate" ng-focus="openEntryDate($event)"
+								 date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"></input>
+						  <span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="openEntryDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+						  </span>
+					  </p>
+				  </div>
+			  </form>
 		  </div>
 		  <div class="modal-footer">
 			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
