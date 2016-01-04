@@ -13,6 +13,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
         .when('/CarsManager', {
             templateUrl: 'views/carsManager.html',
             controller: 'carsManager'
+        })
+        .when('/Branches', {
+            templateUrl: 'views/branchesManager.html',
+            controller: 'branchesManager'
         });
 
     $locationProvider.html5Mode(true);
