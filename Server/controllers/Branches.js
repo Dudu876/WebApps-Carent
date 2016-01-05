@@ -2,11 +2,12 @@
 var Branch = require('../models/Branch');
 
 exports.getAllBranches = function (req, res) {
-    Branch.find({}, function(err, branches) {
+    Branch.find(function (err, branches) {
         if (!err) {
             res.json(branches);
-        }else{
-
+        }
+        else {
+            //Utils.generateResponse(req, res, 0, err);
         }
     });
 };
