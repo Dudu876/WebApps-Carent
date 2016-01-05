@@ -8,19 +8,19 @@ var branchController = require('./controllers/Branches');
 
 module.exports = function (app) {
 
-    app.route('/api/cars')
+    app.route('/api/car')
         .get(carController.getAllCars)
         .post(carController.createCar);
 
-    app.route('/api/cars/:car_id')
+    app.route('/api/car/:car_id')
         .get(carController.getCarById)
         .put(carController.updateCar)
         .delete(carController.deleteCar);
 
-    app.route('/api/branches/')
+    app.route('/api/branch/')
         .get(branchController.getAllBranches);
 
-    app.route('/api/branches/:branch_id')
+    app.route('/api/branch/:branch_id')
         .delete(branchController.deleteBranch);
 
     // route to handle all angular requests
