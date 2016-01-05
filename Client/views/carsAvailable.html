@@ -1,5 +1,35 @@
-<div class="jumbotron text-center">
-    <h1>Home Page 4 Life</h1>
-
-    <p>{{ tagline }}</p>
+<div class="col-md-8">
+    <div class="panel-heading panel-default">
+        <h4>Cars Available Now!</h4>
+    </div>
+    <div class="row">
+        <div class="panel-body">
+            <div class="">
+                <div class="">
+                    <div class="form-group col-md-2">
+                        <label for="inputsm">Filter:</label>
+                        <input class="form-control input-sm" id="inputsm" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" ng-repeat="car in cars">
+                <h3> {{car.type.manufacturer}} {{car.type.model}}
+                    <small> {{car.type.year}}</small>
+                </h3>
+                <p> {{car.category}}, Price: {{car.price}} Gearbox: {{car.gearbox}} </p>
+            </div>
+        </div>
+    </div>
 </div>
+<aside class="col-md-4 panel">
+    <div class="panel-heading panel-default">
+        <h4>Cars Returning</h4>
+    </div>
+    <div class="panel-body">
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="car in cars">
+                {{car.type.manufacturer}} {{car.type.model}} - {{car.type.year}}
+            </li>
+        </ul>
+    </div>
+</aside>
