@@ -1,0 +1,56 @@
+<div ng-controller="branchesManager" class="jumbotron" dir="rtl">
+    <h2>
+        סניפים
+    </h2>
+
+    <script>
+        var map;
+        var arrMarkers = {};
+        var infoWindows = {};
+
+    </script>
+
+    <style>
+
+        #map_canvas img {
+            max-width: none;
+        }
+
+        #branchDetails table {
+            border-spacing: 1px;
+            border-collapse: separate;
+        }
+
+    </style>
+    <div id="map_canvas" style="height: 600px; width: 500px; float:left;">
+
+    </div>
+<table>
+    <tr>
+        <td>
+            <div id="class" ng-repeat="marker in markers | orderBy : 'title'">
+                <a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a>
+            </div>
+        </td>
+        <td>
+            <button id="add_branch" class="btn btn-default" data-toggle="collapse" href="#branchDetails">
+                        הוסף סניף
+            </button>
+        </td>
+    </tr>
+</table>
+    <div id="branchDetails" class="collapse" role="form">
+        <div class="form-horizontal">
+            <form novalidate>
+                <input type="hidden" ng-model="currentBranch.id">
+                Title: <br>
+                <input type="text" ng-model="currentBranch.title"><br>
+                Lat:<br>
+                <input type="text" ng-model="currentBranch.lat">
+                Long:<br>
+                <input type="text" ng-model="currentBranch.long">
+                <input id="submitButton" type="submit" value="Add" />
+            </form>
+        </div>
+    </div>
+</div>
