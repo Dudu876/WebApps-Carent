@@ -12,6 +12,49 @@ exports.getAllBranches = function (req, res) {
     });
 };
 
+exports.upsertBranch = function (req, res){
+    // Check if our id is 0 - then create
+    if (req.body.id == '0')
+    {
+        var branch = new Branch();
+
+        branch.title = req.body.title;
+        branch.lat = req.body.lat;
+        branch.long = req.body.long;
+
+        branch.save(function (err) {
+            if (!err) {
+                res.json('added!');
+            }
+            else {
+                //Utils.generateResponse(req, res, 0, err);
+            }
+        });
+    }
+    // else - Update
+    else
+    {
+        Branch.findById(req.params.id, function (err, branch) {
+            if (!err) {
+                branch.id = req.body.id;
+
+                branch.save(function (err) {
+                    if (!err) {
+                        res.json('updated!');
+                    }
+                    else {
+                        //Utils.generateResponse(req, res, 0, err);
+                    }
+                });
+
+            }
+            else {
+                //Utils.generateResponse(req, res, 0, err);
+            }
+        });
+    }
+};
+
 exports.getBranchById = function (req, res) {
 
     Branch.findById(req.params.branch_id, function (err, branch) {

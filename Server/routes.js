@@ -21,6 +21,7 @@ module.exports = function (app) {
         .get(branchController.getAllBranches);
 
     app.route('/api/branch/:branch_id')
+        .post(branchController.upsertBranch)
         .delete(branchController.deleteBranch);
 
     // route to handle all angular requests

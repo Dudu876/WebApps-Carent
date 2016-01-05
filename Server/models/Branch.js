@@ -9,4 +9,4 @@ var branchSchema = new Schema({
 
 // define our car model
 // module.exports allows us to pass this to other files when it is called
-module.exports = mongoose.model('Branch', branchSchema );
+module.exports = mongoose.model('branches', branchSchema );

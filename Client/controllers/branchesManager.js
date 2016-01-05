@@ -3,6 +3,13 @@ carentApp.controller('branchesManager', [
     function ($scope, $http, $location, $window, $compile, branchService)
     {
 
+        $scope.currentBranch = {
+            id: '0',
+            title: '',
+            long: 33,
+            lat: 33
+        };
+
         var promise = branchService.get();
         promise.success(function (response)
         {
@@ -11,14 +18,13 @@ carentApp.controller('branchesManager', [
                 zoom: 4,
                 center: new google.maps.LatLng(33, 33),
                 mapTypeId: google.maps.MapTypeId.TERRAIN
-            }
+            };
 
             $scope.map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 
             $scope.markers = [];
 
             var createMarker = function (info){
-                var infoWindow = new google.maps.InfoWindow();
                 var marker = new google.maps.Marker({
                     map: $scope.map,
                     position: new google.maps.LatLng(info.lat, info.long),
@@ -43,7 +49,7 @@ carentApp.controller('branchesManager', [
                 });
 
                 $scope.markers.push(marker);
-            }
+            };
 
             for (i = 0; i < $scope.branches.length; i++){
                 createMarker($scope.branches[i]);
@@ -55,9 +61,30 @@ carentApp.controller('branchesManager', [
             }
         });
 
+        $scope.upsertBranch = function() {
+            $http({
+                method: 'POST',
+                url: '/api/branch/' + $scope.currentBranch.id,
+                data: $.param($scope.currentBranch),  // pass in data as strings
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}  // set the headers so angular passing info as form data (not request payload)
+            })
+                .success(function (data) {
+                    console.log(data);
+
+                    if (!data.success) {
+                        // if not successful, bind errors to error variables
+                        $scope.errorName = data.errors.name;
+                        $scope.errorSuperhero = data.errors.superheroAlias;
+                    } else {
+                        // if successful, bind success message to message
+                        $scope.message = data.message;
+                    }
+                });
+        };
+
         $scope.editBranch = function(id){
 
-        }
+        };
 
         $scope.deleteBranch = function(id){
             var toDelete = confirm("Are you sure you want to delete " + arrMarkers[id].title + "?");
