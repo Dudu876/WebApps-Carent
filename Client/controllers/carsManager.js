@@ -3,21 +3,23 @@
  */
 
 carentApp.controller('carsManager', function($scope) {
-
+    $scope.mode = "Adding new car";
     $scope.cars = [{
         number: 123,
         type: { manufacturer: "פיג'ו", model: "107", year: 2011},
         category: "A",
         price: 125,
         gearbox: "ידני",
-        entryDate: "09/09/2010"
+        entryDate: "09/09/2010",
+        branch:{city:"Netanya"}
     },{
         number: 124,
         type: { manufacturer: "פיג'ו", model: "108", year: 2015},
         category: "A",
         price: 180,
         gearbox: "ידני",
-        entryDate: "09/09/2015"
+        entryDate: "09/09/2015",
+        branch:{city:"Tel-aviv"}
     }];
 
     $scope.today = function() {

@@ -1,25 +1,40 @@
 <div ng-controller="carsManager" class="jumbotron text-center">
-	<button style="margin-right: 91%;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+	<style>
+		#addingCarButton{
+			margin-right: 91%;
+		}
+		.float-left{
+			float: left;
+		}
+		#carYearInput{
+			width: 100%;
+		}
+		#carEntryDateInput{
+			width: 100%;
+		}
+
+	</style>
+	<button id="addingCarButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
 	Add new car
 	</button>
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
 		<div class="modal-content">
 		  <div class="modal-header">
-
+				{{mode}}
 		  </div>
 		  <div class="modal-body">
 			  <form>
 				  <div class="form-group">
-					  <label for="carNumberInput">Car number</label>
+					  <label for="carNumberInput" class="float-left">Car number</label>
 					  <input type="text" class="form-control" id="carNumberInput" placeholder="Car Number">
 				  </div>
 				  <div class="form-group">
-					  <label for="carModelInput">Model</label>
+					  <label for="carModelInput" class="float-left">Model</label>
 					  <input type="text" class="form-control" id="carModelInput" placeholder="Model">
 				  </div>
 				  <div class="form-group">
-					  <label for="carCategorySelect">Category</label>
+					  <label for="carCategorySelect" class="float-left">Category</label>
 					  <select id="carCategorySelect" class="form-control">
 						  <option>A</option>
 						  <option>B</option>
@@ -27,7 +42,7 @@
 					  </select>
 				  </div>
 				  <div class="form-group">
-					  <label for="carYearInput">Year</label>
+					  <label for="carYearInput" class="float-left">Year</label>
 					  <p class="input-group" id="carYearInput">
 						  <input type="text" class="form-control" ng-model="dt"
 								 datepicker-popup="{{format}}" datepicker-options="{{datepickerOptions}}"
@@ -39,20 +54,21 @@
 					  </p>
 				  </div>
 				  <div class="form-group">
-					  <label for="carPriceInput">Price</label>
+					  <label for="carPriceInput" class="float-left">Price</label>
 					  <input type="number" class="form-control" id="carPriceInput" placeholder="Price">
 				  </div>
 				  <div class="form-group">
-					  <label for="carGearboxSelect">Gearbox</label>
+					  <label for="carGearboxSelect" class="float-left">Gearbox</label>
 					  <select id="carGearboxSelect" class="form-control">
 						  <option>Manual</option>
 						  <option>Automatic</option>
 						  <option>Robotics</option>
 					  </select>
 				  </div>
+
 				  <div class="form-group">
-					  <label for="carEntryDateInput">Entry date</label>
-					  <p class="input-group" id="carEntryDateInput">
+					  <label for="carEntryDateInput" class="float-left">Entry date</label>
+					  <p class="input-group " id="carEntryDateInput">
 						  <input type="text" class="form-control" ng-model="dt"
 								 datepicker-popup="{{formatEntryDate}}" datepicker-options="{{datepickerEntryOptions}}"
 								 is-open="openedEntryDate" ng-focus="openEntryDate($event)"
@@ -61,6 +77,14 @@
 							<button type="button" class="btn btn-default" ng-click="openEntryDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 						  </span>
 					  </p>
+				  </div>
+				  <div class="form-group">
+					  <label for="carBranchSelect" class="float-left">Gearbox</label>
+					  <select id="carBranchSelect" class="form-control">
+						  <option>Tel aviv</option>
+						  <option>Netanya</option>
+						  <option>Ramat gan</option>
+					  </select>
 				  </div>
 			  </form>
 		  </div>
@@ -81,6 +105,7 @@
 				<th>Price</th>
 				<th>Gearbox</th>
 				<th>Entry date</th>
+				<th>Branch</th>
 				<th></th>
 				<th></th>
             </tr>
@@ -94,8 +119,9 @@
 				<td>{{ car.price }}</td>
 				<td>{{ car.gearbox }}</td>
 				<td>{{ car.entryDate }}</td>
-				<td>Edit</td>
-				<td>Delete</td>
+				<td>{{ car.branch.city }}</td>
+				<td><button type="button" class="btn btn-link">Edit</button></td>
+				<td><button type="button" class="btn btn-link">Delete</button></td>
 			</tr>
         </tbody>
     </table>
