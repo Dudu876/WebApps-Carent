@@ -5,6 +5,7 @@ var path = require('path');
 
 var carController = require('./controllers/Cars');
 var ordersController = require('./controllers/Orders');
+var branchController = require('./controllers/Branches');
 
 module.exports = function (app) {
 
@@ -16,6 +17,13 @@ module.exports = function (app) {
         .get(carController.getCarById)
         .put(carController.updateCar)
         .delete(carController.deleteCar);
+
+    app.route('/api/branch/')
+        .get(branchController.getAllBranches);
+
+    app.route('/api/branch/:branch_id')
+        .post(branchController.upsertBranch)
+        .delete(branchController.deleteBranch);
 
     app.route('/api/orders')
         .get(ordersController.getAllOrders)
