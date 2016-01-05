@@ -22,6 +22,8 @@ carentApp.controller('carsManager', function($scope, carFactory, branchFactory) 
         branch:{city:"Tel-aviv"}
     }];
 
+    $scope.branches = branchFactory.get();
+
     $scope.today = function() {
         $scope.dt = new Date();
     };

@@ -79,11 +79,9 @@
 					  </p>
 				  </div>
 				  <div class="form-group">
-					  <label for="carBranchSelect" class="float-left">Gearbox</label>
+					  <label for="carBranchSelect" class="float-left">Branch</label>
 					  <select id="carBranchSelect" class="form-control">
-						  <option>Tel aviv</option>
-						  <option>Netanya</option>
-						  <option>Ramat gan</option>
+						  <option ng-repeat="branch in branches" value="{{branch.title}}">{{ branch.title }}</option>
 					  </select>
 				  </div>
 			  </form>
