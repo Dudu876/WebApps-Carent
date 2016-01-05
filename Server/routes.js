@@ -17,6 +17,9 @@ module.exports = function (app) {
         .put(carController.updateCar)
         .delete(carController.deleteCar);
 
+    app.route('/api/branches/')
+        .get(branchController.getAllBranches);
+
     app.route('/api/branches/:branch_id')
         .delete(branchController.deleteBranch);
 

@@ -1,23 +1,24 @@
-/**
- * Created by Michael on 1/4/2016.
- */
-/**
- * Created by Dudu on 01/01/2016.
- */
+
 var Branch = require('../models/Branch');
 
 exports.getAllBranches = function (req, res) {
-    Branch.find(function (err, cars) {
-        if (!err) {
-            res.json(cars);
-        }
-        else {
-            //Utils.generateResponse(req, res, 0, err);
-        }
-    });
+    branches = [{
+        id:1,
+        title: "Tel Aviv",
+        lat: 33,
+        long: 33
+    },{
+        id:2,
+        title: "Ramat Gan",
+        lat: 33.5,
+        long: 33.5
+    }];
+
+    res.json(branches);
 };
 
 exports.getBranchById = function (req, res) {
+
     Branch.findById(req.params.branch_id, function (err, branch) {
         if (!err) {
             res.json(branch);

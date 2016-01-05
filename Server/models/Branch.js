@@ -2,11 +2,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var branchSchema = new Schema({
-    id: Number,
     title: String,
     lat: Number,
-    long: Number,
-    branch: { type: Schema.ObjectId, ref: 'branchSchema' }
+    long: Number
 });
 
 // define our car model
