@@ -2,19 +2,13 @@
 var Branch = require('../models/Branch');
 
 exports.getAllBranches = function (req, res) {
-    branches = [{
-        id:1,
-        title: "Tel Aviv",
-        lat: 33,
-        long: 33
-    },{
-        id:2,
-        title: "Ramat Gan",
-        lat: 33.5,
-        long: 33.5
-    }];
+    Branch.find({}, function(err, branches) {
+        if (!err) {
+            res.json(branches);
+        }else{
 
-    res.json(branches);
+        }
+    });
 };
 
 exports.getBranchById = function (req, res) {

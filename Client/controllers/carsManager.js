@@ -2,7 +2,7 @@
  * Created by Dudu on 30/12/2015.
  */
 
-carentApp.controller('carsManager', function($scope) {
+carentApp.controller('carsManager', function($scope, carFactory, branchFactory) {
     $scope.mode = "Adding new car";
     $scope.cars = [{
         number: 123,
