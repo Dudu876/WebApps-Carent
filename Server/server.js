@@ -9,8 +9,6 @@ var routes = require('./routes');
 
 var app = express();
 
-
-
 // config files
 var db = require('./config/db');
 

@@ -5,10 +5,13 @@ carentApp.factory('OrderService', ['$http', function($http) {
 
     return {
         // call to get all cars
-        get : function() {
-            return $http.get('/api/orders');
+        getAll : function() {
+            return $http.get('/api/orders', {active:false});
         },
 
+        getActive : function() {
+            return $http.get('/api/orders', {params: {active:true}});
+        },
 
         // these will work when more API routes are defined on the Node side of things
         // call to POST and create a new car
