@@ -2,7 +2,7 @@
  * Created by Dudu on 30/12/2015.
  */
 
-carentApp.controller('carsManager', function($scope, carFactory, branchFactory) {
+carentApp.controller('carsManager', function($scope, carFactory, branchService) {
     $scope.mode = "Adding new car";
     $scope.cars = [{
         number: 123,
@@ -22,7 +22,7 @@ carentApp.controller('carsManager', function($scope, carFactory, branchFactory) 
         branch:{city:"Tel-aviv"}
     }];
 
-    $scope.branches = branchFactory.get();
+    $scope.branches = branchService.get();
 
     $scope.today = function() {
         $scope.dt = new Date();
