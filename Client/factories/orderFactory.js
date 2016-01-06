@@ -4,7 +4,7 @@
 carentApp.factory('OrderService', ['$http', function($http) {
 
     return {
-        // call to get all cars
+        // call to get all orders
         get : function() {
             return $http.get('/api/orders');
         },

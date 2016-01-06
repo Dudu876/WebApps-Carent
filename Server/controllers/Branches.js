@@ -13,8 +13,9 @@ exports.getAllBranches = function (req, res) {
 };
 
 exports.upsertBranch = function (req, res){
+    var result;
     // Check if our id is 0 - then create
-    if (req.body.id == '0')
+    if (req.body._id == '0')
     {
         var branch = new Branch();
 
@@ -22,34 +23,40 @@ exports.upsertBranch = function (req, res){
         branch.lat = req.body.lat;
         branch.long = req.body.long;
 
-        branch.save(function (err) {
+        branch.save(function (err, createdBranch) {
             if (!err) {
-                res.json('added!');
+                result = { success: true, isNew: true, branch: createdBranch};
+
             }
             else {
-                //Utils.generateResponse(req, res, 0, err);
+                result = { success: false, isNew: true };
             }
+
+            res.json(result);
         });
     }
     // else - Update
     else
     {
-        Branch.findById(req.params.id, function (err, branch) {
+        Branch.findById(req.body._id, function (err, branch) {
             if (!err) {
-                branch.id = req.body.id;
+                branch.title = req.body.title;
+                branch.lat = req.body.lat;
+                branch.long = req.body.long;
 
-                branch.save(function (err) {
+                branch.save(function (err, updatedBranch) {
                     if (!err) {
-                        res.json('updated!');
+                        result = { success: true, isNew: false, branch: updatedBranch};
                     }
                     else {
-                        //Utils.generateResponse(req, res, 0, err);
+                        result = { success: false, isNew: false};
                     }
+
+                    res.json(result);
                 });
 
             }
             else {
-                //Utils.generateResponse(req, res, 0, err);
             }
         });
     }
@@ -91,7 +98,8 @@ exports.updateBranch = function (req, res) {
 exports.deleteBranch = function (req, res) {
     Branch.remove({_id: req.params.branch_id}, function (err) {
         if (!err) {
-            res.json('branch deleted');
+            var result = { success: true};
+            res.json(result);
         }
         else {
             //Utils.generateResponse(req, res, 0, err);
