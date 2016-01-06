@@ -13,7 +13,7 @@ module.exports = function (app) {
         .get(carController.getAllCars)
         .post(carController.createCar);
 
-    app.route('/api/cars/:car_id')
+    app.route('/api/cars/:number')
         .get(carController.getCarById)
         .put(carController.updateCar)
         .delete(carController.deleteCar);

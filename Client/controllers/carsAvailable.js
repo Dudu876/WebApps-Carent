@@ -28,7 +28,7 @@ carentApp.controller('carsAvailable', ['$scope', '$uibModal', 'OrderService', fu
         var modalInstance = $uibModal.open({
             animation: $scope.animationsEnabled,
             templateUrl: 'views/orderModal.html',
-            controller: 'ModalInstanceCtrl',
+            controller: 'ModalInstanceCtrlCar',
             size: size,
             resolve: {
                 carNumber: function () {
@@ -50,7 +50,7 @@ carentApp.controller('carsAvailable', ['$scope', '$uibModal', 'OrderService', fu
 
 }]);
 
-carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, carNumber, price) {
+carentApp.controller('ModalInstanceCtrlCar', function ($scope, $uibModalInstance, carNumber, price) {
 
     $scope.carNumber = carNumber;
     $scope.price = price;

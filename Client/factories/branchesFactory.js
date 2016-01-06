@@ -6,7 +6,7 @@ carentApp.factory('branchService', ['$http', function($http) {
     return {
         // call to get all branches
         get : function() {
-            return $http.get('/api/branch');
+            return $http.get('/api/branch/');
         },
         // these will work when more API routes are defined on the Node side of things
         // call to POST and create a new car

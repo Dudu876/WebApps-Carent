@@ -2,35 +2,182 @@
  * Created by Dudu on 30/12/2015.
  */
 
-carentApp.controller('carsManager', function($scope, carFactory, branchService) {
-    $scope.mode = "Adding new car";
-    $scope.cars = [{
-        number: 123,
-        type: { manufacturer: "פיג'ו", model: "107", year: 2011},
-        category: "A",
-        price: 125,
-        gearbox: "ידני",
-        entryDate: "09/09/2010",
-        branch:{city:"Netanya"}
-    },{
-        number: 124,
-        type: { manufacturer: "פיג'ו", model: "108", year: 2015},
-        category: "A",
-        price: 180,
-        gearbox: "ידני",
-        entryDate: "09/09/2015",
-        branch:{city:"Tel-aviv"}
-    }];
+carentApp.controller('carsManager', function($scope, $uibModal, $log, carFactory, branchService) {
+    $scope.cars = [];
+    $scope.branches = [];
+    $scope.updateMode = "";
 
-    $scope.branches = branchService.get();
+    $scope.updateMode = "Adding new car";
+    var isUpdateMode = false;
+    $scope.showModal = false;
+
+    $scope.init = function(){
+        initCars();
+        initBranches();
+    }
+
+    // init car list
+    var initCars = function(){
+        carFactory.get().success(function(response){
+            $scope.cars = response;
+        });
+    }
+
+    // init branches list
+    var initBranches = function(){
+        // get all branches
+        branchService.get().success(function(response){
+            $scope.branches = response;
+        });
+    }
+
+    $scope.toggleModal = function(){
+        $scope.showModal = !$scope.showModal;
+    };
+    $scope.openUpdateForm = function(car){
+        isUpdateMode = true;
+        $scope.updateMode = "Edit car";
+
+        $scope.showModal = !$scope.showModal;
+
+    }
+
+    // remove car from list
+    $scope.removeRow = function(number){
+        carFactory.delete(number).success(function(response){
+            var index = -1;
+            var carArr = eval( $scope.cars );
+            for( var i = 0; i < carArr.length; i++ ) {
+                if( carArr[i].number === response ) {
+                    index = i;
+                    break;
+                }
+            }
+            if( index === -1 ) {
+                alert( "Something gone wrong" );
+            }
+            $scope.cars.splice( index, 1 );
+        }).error(function(data){
+            alert( "Something gone wrong" );
+        });
+    };
+
+    $scope.openModal = function (size,isUpdateMode,car) {
+        if (!isUpdateMode)
+        {
+            car = {
+                number: "",
+                type: { manufacturer: "", model: "", year: null},
+                category: "",
+                price: null,
+                gearbox: "",
+                branch: ""
+            };
+            $scope.updateMode = "Adding new car";
+        }else{
+            $scope.updateMode = "Edit car";
+        }
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'views/carModal.html',
+            controller: 'ModalInstanceCtrlCar',
+            size: size,
+            resolve: {
+                branchService: function () {
+                  return branchService;
+                },
+                number: function () {
+                    return car.number;
+                },
+                manufacturer: function () {
+                    return car.type.manufacturer;
+                },
+                model: function () {
+                    return car.type.model;
+                },
+                year: function () {
+                    return car.type.year;
+                },
+                category: function () {
+                    return car.category;
+                },
+                price: function () {
+                    return car.price;
+                },
+                gearbox: function () {
+                    return car.gearbox;
+                },
+                branch: function () {
+                    return car.branch;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (currCar) {
+            // In case create new car
+            if (!isUpdateMode) {
+                carFactory.create(currCar).success(function(response){
+                    $scope.initCars();
+                }).error(function(data){
+                    alert( "Something gone wrong" );
+                });
+            }
+            // In case update car
+            else {
+                carFactory.update(currCar).success(function(response){
+                    $scope.initCars();
+                }).error(function(data){
+                    alert( "Something gone wrong" );
+                });
+            }
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+});
+
+
+carentApp.controller('ModalInstanceCtrlCar', function ($scope, $uibModalInstance,branchService, number, manufacturer,model,year,category,price,gearbox,branch) {
+    $scope.categories = ["","A","B","C","D"];
+    $scope.gearboxes = ["","Manual","Automatic","Robotics"];
+    $scope.currCar = {
+        number: number,
+        type: { manufacturer: manufacturer, model: model, year: year},
+        category: category,
+        price: price,
+        gearbox: gearbox,
+        branch: branch
+    };
+
+    $scope.init = function(){
+        initBranches();
+    }
+
+    // init branches list
+    var initBranches = function(){
+        // get all branches
+        branchService.get().success(function(response){
+            $scope.branches = response;
+        });
+    }
+
+
+    $scope.saveChanges = function () {
+        $uibModalInstance.close($scope.currCar);
+    };
+
+    $scope.close = function () {
+        $uibModalInstance.dismiss('close');
+    };
+
 
     $scope.today = function() {
-        $scope.dt = new Date();
+        $scope.currCar.type.year = new Date();
     };
     $scope.today();
 
     $scope.clear = function () {
-        $scope.dt = null;
+        $scope.currCar.type.year = null;
     };
 
     // Disable weekend selection
@@ -72,5 +219,4 @@ carentApp.controller('carsManager', function($scope, carFactory, branchService) 
     $scope.datepickerEntryOptions = {
 
     };
-
 });

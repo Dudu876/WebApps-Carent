@@ -12,7 +12,6 @@ var carSchema = new Schema({
     category: String,
     price: Number,
     gearbox: String,
-    entryDate: Date,
     branch: { type: Schema.ObjectId, ref: 'branchSchema' }
 });
 

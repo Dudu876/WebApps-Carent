@@ -47,9 +47,9 @@ exports.updateCar = function (req, res) {
 };
 
 exports.deleteCar = function (req, res) {
-    Car.remove({_id: req.params.car_id}, function (err) {
+    Car.remove({number: req.params.number}, function (err) {
         if (!err) {
-            res.json('car deleted');
+            res.json(req.params.number);
         }
         else {
             //Utils.generateResponse(req, res, 0, err);
@@ -60,8 +60,13 @@ exports.deleteCar = function (req, res) {
 exports.createCar = function (req, res) {
     var car = new Car();
     car.number = req.body.number;
-    car.type.manufacturer = req.body.manufacturer;
-    car.type.model = req.body.model;
+    car.type.manufacturer = req.body.type.manufacturer;
+    car.type.model = req.body.type.model;
+    car.type.year = req.body.type.year;
+    car.category = req.body.category;
+    car.price = req.body.price;
+    car.gearbox = req.body.gearbox;
+    //car.branch = req.body.branch;
 
     car.save(function (err) {
         if (!err) {
