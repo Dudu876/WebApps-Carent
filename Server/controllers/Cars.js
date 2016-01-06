@@ -4,14 +4,11 @@
 var Car = require('../models/Car');
 
 exports.getAllCars = function (req, res) {
-    Car.find(function (err, cars) {
-        if (!err) {
+    Car.find({})
+        .populate('branch')
+        .exec(function(error,cars){
             res.json(cars);
-        }
-        else {
-            //Utils.generateResponse(req, res, 0, err);
-        }
-    });
+        });
 };
 
 exports.getCarById = function (req, res) {
@@ -62,14 +59,15 @@ exports.createCar = function (req, res) {
     car.number = req.body.number;
     car.type.manufacturer = req.body.type.manufacturer;
     car.type.model = req.body.type.model;
-    car.type.year = req.body.type.year;
+    car.type.year = new Date(req.body.type.year).getFullYear();
     car.category = req.body.category;
     car.price = req.body.price;
     car.gearbox = req.body.gearbox;
-    //car.branch = req.body.branch;
+    car.branch = req.body.branch;
 
     car.save(function (err) {
         if (!err) {
+
             res.json('car created');
         }
         else {

@@ -48,7 +48,7 @@ carentApp.controller('carsManager', function($scope, $uibModal, $log, carFactory
             var index = -1;
             var carArr = eval( $scope.cars );
             for( var i = 0; i < carArr.length; i++ ) {
-                if( carArr[i].number === response ) {
+                if( carArr[i].number === parseInt(response) ) {
                     index = i;
                     break;
                 }
@@ -117,7 +117,7 @@ carentApp.controller('carsManager', function($scope, $uibModal, $log, carFactory
             // In case create new car
             if (!isUpdateMode) {
                 carFactory.create(currCar).success(function(response){
-                    $scope.initCars();
+                    initCars();
                 }).error(function(data){
                     alert( "Something gone wrong" );
                 });
@@ -125,7 +125,7 @@ carentApp.controller('carsManager', function($scope, $uibModal, $log, carFactory
             // In case update car
             else {
                 carFactory.update(currCar).success(function(response){
-                    $scope.initCars();
+                    initCars();
                 }).error(function(data){
                     alert( "Something gone wrong" );
                 });

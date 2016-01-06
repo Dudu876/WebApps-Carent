@@ -26,7 +26,6 @@
                 <th>Year</th>
 				<th>Price</th>
 				<th>Gearbox</th>
-				<th>Entry date</th>
 				<th>Branch</th>
 				<th></th>
 				<th></th>
@@ -40,8 +39,7 @@
 				<td>{{ car.type.year }}</td>
 				<td>{{ car.price }}</td>
 				<td>{{ car.gearbox }}</td>
-				<td>{{ car.entryDate }}</td>
-				<td>{{ car.branch.city }}</td>
+				<td>{{ car.branch.title }}</td>
 				<td><button type="button" class="btn btn-primary" ng-click="openUpdateForm(car)">Edit</button></td>
 				<td><button type="button" class="btn btn-primary" ng-click="removeRow(car.number)">Delete</button></td>
 			</tr>
