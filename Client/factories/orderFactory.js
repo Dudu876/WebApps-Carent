@@ -6,10 +6,7 @@ carentApp.factory('OrderService', ['$http', function($http) {
     return {
         // call to get all orders
         get : function() {
-            return $http.get('/api/orders');
-        // call to get all cars
-        getAll : function() {
-            return $http.get('/api/orders', {active:false});
+            return $http.get('/api/orders', {params: {active:false}});
         },
 
         getActive : function() {
