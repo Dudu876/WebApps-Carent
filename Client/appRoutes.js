@@ -17,6 +17,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
         .when('/Branches', {
             templateUrl: 'views/branchesManager.html',
             controller: 'branchesManager'
+        })
+        .when('/Statistics', {
+            templateUrl: 'views/rentStatistics.html',
+            controller: 'rentStatistics'
         });
 
     $locationProvider.html5Mode(true);

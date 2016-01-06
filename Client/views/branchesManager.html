@@ -32,16 +32,15 @@
                 </div>
             </td>
             <td>
-                <button id="add_branch" class="btn btn-default" data-toggle="collapse" href="#branchDetails">
-                            הוסף סניף
+                <button id="add_branch" class="btn btn-default" ng-click="resetForm()" ng-bind="buttonText">
                 </button>
             </td>
         </tr>
     </table>
-    <div id="branchDetails" class="collapse" role="form">
+    <div id="branchDetails" collapse="isCollapsed">
         <div class="form-horizontal">
             <form ng-submit="upsertBranch()">
-                <input type="hidden" ng-model="currentBranch.id">
+                <input type="hidden" ng-model="currentBranch._id">
                 שם:
                 <br>
                 <input type="text" ng-model="currentBranch.title"><br>
@@ -51,7 +50,7 @@
                 Long:
                 <br>
                 <input type="text" ng-model="currentBranch.long">
-                <input id="submitButton" type="submit" value="Add" />
+                <button type="submit">שלח </button>
             </form>
         </div>
     </div>

@@ -23,7 +23,6 @@ carentApp.factory('carFactory', ['$http', function($http) {
         // call to DELETE a car
         delete : function(number) {
             return $http.delete(carURL + number);
-        }
+        },
     }
-
 }]);
