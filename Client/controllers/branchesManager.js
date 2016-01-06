@@ -132,6 +132,7 @@ carentApp.controller('branchesManager', [
                     })[0];
                     existingMarker.setPosition(new google.maps.LatLng(info.lat, info.long));
                     existingMarker.title = info.title;
+
                     google.maps.event.clearInstanceListeners(existingMarker);
 
                     var htmlElement = '<div id=infowin><h2>' + existingMarker.title + '</h2>' +
