@@ -11,11 +11,11 @@ module.exports = function (app) {
 
     app.route('/api/cars')
         .get(carController.getAllCars)
-        .post(carController.createCar);
+        .post(carController.createCar)
+        .put(carController.updateCar);
 
     app.route('/api/cars/:number')
         .get(carController.getCarById)
-        .put(carController.updateCar)
         .delete(carController.deleteCar);
 
     app.route('/api/branch/')

@@ -23,9 +23,16 @@ exports.getCarById = function (req, res) {
 };
 
 exports.updateCar = function (req, res) {
-    Car.findById(req.params.car_id, function (err, car) {
+    Car.findById(req.body._id, function (err, car) {
         if (!err) {
             car.number = req.body.number;
+            car.type.manufacturer = req.body.type.manufacturer;
+            car.type.model = req.body.type.model;
+            car.type.year = new Date(req.body.type.year).getFullYear();
+            car.category = req.body.category;
+            car.price = req.body.price;
+            car.gearbox = req.body.gearbox;
+            car.branch = req.body.branch;
 
             car.save(function (err) {
                 if (!err) {

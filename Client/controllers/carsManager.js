@@ -6,9 +6,8 @@ carentApp.controller('carsManager', function($scope, $uibModal, $log, carFactory
     $scope.cars = [];
     $scope.branches = [];
     $scope.updateMode = "";
-
-    $scope.updateMode = "Adding new car";
     var isUpdateMode = false;
+    var updateMode = "Adding new car";
     $scope.showModal = false;
 
     $scope.init = function(){
@@ -66,6 +65,7 @@ carentApp.controller('carsManager', function($scope, $uibModal, $log, carFactory
         if (!isUpdateMode)
         {
             car = {
+                _id: "",
                 number: "",
                 type: { manufacturer: "", model: "", year: null},
                 category: "",
@@ -73,9 +73,12 @@ carentApp.controller('carsManager', function($scope, $uibModal, $log, carFactory
                 gearbox: "",
                 branch: ""
             };
-            $scope.updateMode = "Adding new car";
+            updateMode = "Adding new car";
         }else{
-            $scope.updateMode = "Edit car";
+            /*var yearNumber = car.year;
+            car.year = new Date();
+            car.year.setYear(yearNumber);*/
+            updateMode = "Edit car";
         }
         var modalInstance = $uibModal.open({
             animation: $scope.animationsEnabled,
@@ -85,6 +88,9 @@ carentApp.controller('carsManager', function($scope, $uibModal, $log, carFactory
             resolve: {
                 branchService: function () {
                   return branchService;
+                },
+                _id: function () {
+                    return car._id;
                 },
                 number: function () {
                     return car.number;
@@ -96,7 +102,13 @@ carentApp.controller('carsManager', function($scope, $uibModal, $log, carFactory
                     return car.type.model;
                 },
                 year: function () {
-                    return car.type.year;
+                    var year = new Date();;
+                    if (car.type.year != null){
+                        year.setYear(car.type.year);
+
+                    }
+
+                    return year;
                 },
                 category: function () {
                     return car.category;
@@ -109,6 +121,9 @@ carentApp.controller('carsManager', function($scope, $uibModal, $log, carFactory
                 },
                 branch: function () {
                     return car.branch;
+                },
+                updateMode:function(){
+                    return updateMode;
                 }
             }
         });
@@ -137,10 +152,11 @@ carentApp.controller('carsManager', function($scope, $uibModal, $log, carFactory
 });
 
 
-carentApp.controller('ModalInstanceCtrlCar', function ($scope, $uibModalInstance,branchService, number, manufacturer,model,year,category,price,gearbox,branch) {
+carentApp.controller('ModalInstanceCtrlCar', function ($scope, $uibModalInstance, branchService, _id ,number, manufacturer,model,year,category,price,gearbox,branch,updateMode) {
     $scope.categories = ["","A","B","C","D"];
     $scope.gearboxes = ["","Manual","Automatic","Robotics"];
     $scope.currCar = {
+        _id: _id,
         number: number,
         type: { manufacturer: manufacturer, model: model, year: year},
         category: category,
@@ -148,6 +164,7 @@ carentApp.controller('ModalInstanceCtrlCar', function ($scope, $uibModalInstance
         gearbox: gearbox,
         branch: branch
     };
+    $scope.updateMode = updateMode;
 
     $scope.init = function(){
         initBranches();
@@ -161,7 +178,6 @@ carentApp.controller('ModalInstanceCtrlCar', function ($scope, $uibModalInstance
         });
     }
 
-
     $scope.saveChanges = function () {
         $uibModalInstance.close($scope.currCar);
     };
@@ -172,7 +188,7 @@ carentApp.controller('ModalInstanceCtrlCar', function ($scope, $uibModalInstance
 
 
     $scope.today = function() {
-        $scope.currCar.type.year = new Date();
+        $scope.currCar.type.year = year;
     };
     $scope.today();
 

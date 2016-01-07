@@ -40,7 +40,7 @@
 				<td>{{ car.price }}</td>
 				<td>{{ car.gearbox }}</td>
 				<td>{{ car.branch.title }}</td>
-				<td><button type="button" class="btn btn-primary" ng-click="openUpdateForm(car)">Edit</button></td>
+				<td><button type="button" class="btn btn-primary" ng-click="openModal('',true,car)">Edit</button></td>
 				<td><button type="button" class="btn btn-primary" ng-click="removeRow(car.number)">Delete</button></td>
 			</tr>
         </tbody>
