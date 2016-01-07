@@ -10,13 +10,8 @@ nav {
 }
 
 .carbox {
-    border-radius: 25px;
-    border: 1px solid rgba(103, 103, 103, 0.77);
     padding: 20px;
     text-align: center;
-    vertical-align: middle;
-    margin-left: 10%;
-    position: relative;
     cursor: pointer;
 }
 
