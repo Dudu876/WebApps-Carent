@@ -2,10 +2,11 @@
  * Created by Dudu on 06/01/2016.
  */
 
-carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, carNumber, price) {
+carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, car) {
 
-    $scope.carNumber = carNumber;
-    $scope.price = price;
+    $scope.car = car;
+    $scope.carNumber = car.number;
+    $scope.price = car.price;
     $scope.dates = {};
 
 

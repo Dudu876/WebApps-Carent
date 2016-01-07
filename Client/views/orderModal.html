@@ -4,7 +4,7 @@
     });
 </script>
 <div class="modal-header">
-    <h3 class="modal-title">Create Order</h3>
+    <h3 class="modal-title">Create Order - {{car.type.manufacturer}} {{car.type.model}} <small>{{car.type.year}}</small></h3>
 </div>
 <div class="modal-body">
     <div class="modal-body">
@@ -12,7 +12,7 @@
             <div class="form-group">
                 <label for="carNumberInput">Car number</label>
                 <input type="text" class="form-control" id="carNumberInput" placeholder="Car Number"
-                       ng-model="carNumber">
+                       ng-model="car.number">
             </div>
             <div class="form-group">
                 <label for="startDate">Start date</label>
@@ -34,7 +34,7 @@
             </div>
             <div class="form-group">
                 <label for="priceInput">Price</label>
-                <input type="text" class="form-control" id="priceInput" placeholder="Price" ng-model="price">
+                <input type="text" class="form-control" id="priceInput" placeholder="Price" ng-model="car.price">
             </div>
         </form>
     </div>
