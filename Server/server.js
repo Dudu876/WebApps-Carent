@@ -5,19 +5,23 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var socket = require('socket.io');
 var routes = require('./routes');
 
 var app = express();
+var server = app.listen(8080);
+console.log('Listening to port 8080')
+io = socket.listen(server);
+exports.io = io;
 
 // config files
 var db = require('./config/db');
 
 // connect to our mongoDB database
-// (uncomment after you enter in your own credentials in config/db.js)
 mongoose.connect(db.url);
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, '../Client/public', 'images', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,6 +32,19 @@ app.use(cookieParser());
 
 app.use('/',express.static(path.join(__dirname, '../Client')));
 routes(app);
+
+// socket io define
+io.on('connection', function (client) {
+    console.log('Client connected..');
+    client.on('newScreen', function (data) {
+
+    });
+
+    client.on('disconnect', function (data) {
+        console.log("disconnect + " + data);
+    });
+});
+
 
 // route to handle creating goes here (app.post)
 // route to handle delete goes here (app.delete)
@@ -66,4 +83,4 @@ routes(app);
 //  });
 //});
 
-module.exports = app;
+//module.exports = app;

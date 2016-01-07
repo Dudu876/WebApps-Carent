@@ -2,7 +2,9 @@
  * Created by Dudu on 05/01/2016.
  */
 
+var server = require('../server.js')
 var Order = require('../models/Order');
+
 
 exports.getOrders = function (req, res) {
     if (req.query.active) {
@@ -38,6 +40,7 @@ exports.createOrder = function (req, res) {
     order.save(function (err) {
         if (!err) {
             res.json('order created');
+            server.io.sockets.emit('newOrder', order);
         }
         else {
             //Utils.generateResponse(req, res, 0, err);

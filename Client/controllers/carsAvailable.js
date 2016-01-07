@@ -45,6 +45,16 @@ carentApp.controller('carsAvailable', ['$scope', '$uibModal', 'OrderService', 'c
         });
     }
 
+    var socket = io.connect('http://localhost:8080');
+    socket.on('connect', function (data) {
+        //socket.emit('newScreen', { "screen_id": screen_id});
+    });
+    socket.on('newOrder', function(data) {
+        $scope.orders.push(data);
+        organizeData();
+        $scope.$apply();
+    });
+
     $scope.openModal = function (size, car) {
 
         var modalInstance = $uibModal.open({
@@ -61,82 +71,9 @@ carentApp.controller('carsAvailable', ['$scope', '$uibModal', 'OrderService', 'c
 
         modalInstance.result.then(function (order) {
             OrderService.create(order);
-            alert('Order Created');
-        }, function () {
-            alert('Order canceled');
+        },
+            function () {
         });
     };
 }]);
-
-
-carentApp.controller('ModalInstanceCtrlCar', function ($scope, $uibModalInstance, carNumber, price) {
-
-    $scope.carNumber = carNumber;
-    $scope.price = price;
-
-
-    $scope.today = function () {
-        var today = new Date();
-        $scope.dt = new Date().toLocaleString();
-        var tomorrow = new Date();
-        tommorow = tomorrow.setDate(today.getDate() + 1);
-        $scope.dtend = tomorrow.toLocaleString();
-    };
-    $scope.today();
-
-    // Disable weekend selection
-    $scope.disabled = function (date, mode) {
-        return ( mode === 'day' && (  date.getDay() === 6 ) );
-    };
-
-    $scope.ok = function () {
-        var order = {
-            startDate: $scope.dt,
-            endDate: $scope.dtend,
-            carNumber: $scope.carNumber,
-            price: $scope.price
-        };
-        $uibModalInstance.close(order);
-    };
-
-    $scope.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
-    };
-    //
-    //$scope.openEntryDateStart = function($event) {
-    //    $event.preventDefault();
-    //    $event.stopPropagation();
-    //
-    //    $scope.openedEntryDateStart = true;
-    //};
-    //
-    //$scope.openEntryDateEnd = function($event) {
-    //    $event.preventDefault();
-    //    $event.stopPropagation();
-    //
-    //    $scope.openedEntryDateEnd = true;
-    //};
-    //
-
-    //
-    //$scope.clear = function () {
-    //    $scope.dt = null;
-    //};
-    //
-    //$scope.initDate = new Date('2016-15-20');
-    //$scope.formats = ['yyyy','dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-    //$scope.format = $scope.formats[0];
-    ////$scope.formatEntryDate = $scope.formats[2];
-    ////
-    ////$scope.datepickerOptions = {
-    ////    datepickerMode:"'year'",
-    ////    minMode:"'year'",
-    ////    minDate:"minDate",
-    ////    showWeeks:"false",
-    ////};
-    //
-    //$scope.datepickerEntryOptions = {
-    //
-    //};
-});
 
