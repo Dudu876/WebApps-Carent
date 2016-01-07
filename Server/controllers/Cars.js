@@ -11,6 +11,10 @@ exports.getAllCars = function (req, res) {
         });
 };
 
+exports.searchCar = function(req,res){
+  Car.find({})
+};
+
 exports.getCarById = function (req, res) {
     Car.findById(req.params.car_id, function (err, car) {
         if (!err) {

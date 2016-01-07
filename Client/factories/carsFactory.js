@@ -2,7 +2,7 @@
  * Created by Dudu on 30/12/2015.
  */
 var carURL = '/api/cars/';
-
+var searchURL = '/api/searchCar/';
 carentApp.factory('carFactory', ['$http', function($http) {
 
     return {
@@ -23,6 +23,10 @@ carentApp.factory('carFactory', ['$http', function($http) {
         // call to DELETE a car
         delete : function(number) {
             return $http.delete(carURL + number);
+        },
+        // search Car
+        searchCar : function(search) {
+            return $http.post(searchURL, search);
         },
     }
 }]);

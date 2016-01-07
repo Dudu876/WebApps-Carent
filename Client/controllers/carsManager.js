@@ -6,9 +6,19 @@ carentApp.controller('carsManager', function($scope, $uibModal, $log, carFactory
     $scope.cars = [];
     $scope.branches = [];
     $scope.updateMode = "";
+    $scope.categories = ["","A","B","C","D"];
     var isUpdateMode = false;
     var updateMode = "Adding new car";
     $scope.showModal = false;
+    $scope.searchCarObj = {
+      number: null,
+        model: "",
+        category:""
+    };
+
+    $scope.searchCar = function(){
+
+    }
 
     $scope.init = function(){
         initCars();
