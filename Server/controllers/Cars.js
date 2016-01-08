@@ -12,7 +12,27 @@ exports.getAllCars = function (req, res) {
 };
 
 exports.searchCar = function(req,res){
-  Car.find({})
+    var query = {};
+
+    if (req.body.number != null && req.body.number != ''){
+        var regexNumber = new RegExp(req.body.number, 'i');
+        query.number = {$regex: regexNumber};
+    }
+    if (req.body.model != null && req.body.model != ''){
+        var regexModel = new RegExp(req.body.model, 'i');
+
+        query.$or = [];
+        query.$or.push({"type.model":{$regex: regexModel}});
+        query.$or.push({"type.manufacturer":{$regex: regexModel}});
+
+    }
+    if (req.body.category != null && req.body.category != ''){
+        query.category = req.body.category;
+    }
+
+    var myAggregation = Car.find(query).populate('branch').exec(function(error,cars){
+        res.json(cars);
+    });
 };
 
 exports.getCarById = function (req, res) {

@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var carSchema = new Schema({
-    number: Number,
+    number: String,
     type: { manufacturer: String, model: String, year: Number},
     category: String,
     price: Number,

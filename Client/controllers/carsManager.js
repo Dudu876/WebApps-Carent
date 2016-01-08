@@ -11,13 +11,15 @@ carentApp.controller('carsManager', function($scope, $uibModal, $log, carFactory
     var updateMode = "Adding new car";
     $scope.showModal = false;
     $scope.searchCarObj = {
-      number: null,
+      number: "",
         model: "",
         category:""
     };
 
     $scope.searchCar = function(){
-
+        carFactory.searchCar($scope.searchCarObj).success(function(res){
+           $scope.cars = res;
+        });
     }
 
     $scope.init = function(){

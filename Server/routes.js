@@ -13,8 +13,9 @@ module.exports = function (app) {
         .get(carController.getAllCars)
         .post(carController.createCar)
         .put(carController.updateCar);
+
     app.route('/api/searchCar/')
-        .get();
+        .post(carController.searchCar);
 
     app.route('/api/cars/:number')
         .get(carController.getCarById)
