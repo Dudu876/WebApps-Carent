@@ -7,23 +7,26 @@
             <div class="row">
                 <label >Filters:</label>
                 <div class="">
-                    <!--<div class="form-group col-md-4">-->
-                        <!--<input class="form-control input-sm" placeholder="Manufacturer" ng-model="search.type.manufacturer" type="text">-->
-                    <!--</div>-->
-                    <!--<div class="form-group col-md-4">-->
-                        <!--<input class="form-control input-sm" placeholder="Category" ng-model="search.category"  type="text">-->
-                    <!--</div>-->
-                    <!--<div class="form-group col-md-4">-->
-                        <!--<input class="form-control input-sm" placeholder="Gearbox" ng-model="search.gearbox"  type="text">-->
-                    <!--</div>-->
-                    <div class="form-group col-md-12">
-                        <input class="form-control input-sm" placeholder="Anything" ng-model="search" type="text">
+                    <div class="form-group col-md-3">
+                        <input class="form-control input-sm" placeholder="Manufacturer" ng-model="search.type.manufacturer" type="text">
                     </div>
+                    <div class="form-group col-md-3">
+                        <input class="form-control input-sm" placeholder="Category" ng-model="search.category"  type="text">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <input class="form-control input-sm" placeholder="Gearbox" ng-model="search.gearbox"  type="text">
+                    </div>
+                    <button class="btn btn-primary" ng-click="search()">
+                        Filter
+                    </button>
+                    <!--<div class="form-group col-md-12">-->
+                        <!--<input class="form-control input-sm" placeholder="Anything" ng-model="search" type="text">-->
+                    <!--</div>-->
                 </div>
             </div>
             <hr>
             <div class="row">
-                <div class="col-sm-6" ng-repeat="car in cars | filter:search">
+                <div class="col-sm-6" ng-repeat="car in cars"> <!--| filter:search-->
                     <div class="thumbnail carbox" ng-click="openModal('',car)">
                         <h3> {{car.type.manufacturer}} {{car.type.model}}
                             <small> {{car.type.year}}</small>
