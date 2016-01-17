@@ -9,17 +9,17 @@ var Order = require('../models/Order');
 exports.getOrders = function (req, res) {
     if (req.query.active) {
         var now = new Date();
-        Order.find({startDate: {$lte: now}, endDate: {$gte: now}}, function (err, orders) {
+        Order.find({startDate: {$lte: now}, endDate: {$gte: now}}).populate('car').exec(function (err, orders) {
             if (!err) {
                 res.json(orders);
             }
             else {
                 //Utils.generateResponse(req, res, 0, err);
             }
-        })
+        });
     }
     else {
-        Order.find(function (err, orders) {
+        Order.find().populate('car').exec(function (err, orders) {
             if (!err) {
                 res.json(orders);
             }
