@@ -9,7 +9,7 @@ var Schema = mongoose.Schema;
 var orderSchema = new Schema({
     startDate: Date,
     endDate: Date,
-    carNumber: Number,
+    carNumber: String,
     price: Number
 });
 

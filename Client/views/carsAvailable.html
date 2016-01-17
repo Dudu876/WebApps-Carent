@@ -26,8 +26,8 @@
             </div>
             <hr>
             <div class="row">
-                <div class="col-sm-6" ng-repeat="car in cars"> <!--| filter:search-->
-                    <div class="thumbnail carbox" ng-click="openModal('',car)">
+                <div class="col-sm-6 " ng-repeat="car in cars"> <!--| filter:search-->
+                    <div class="thumbnail carbox animated bounceInUp" ng-click="openModal('',car)">
                         <h3> {{car.type.manufacturer}} {{car.type.model}}
                             <small> {{car.type.year}}</small>
                         </h3>
@@ -46,7 +46,7 @@
     <div class="panel-body">
         <ul class="list-group">
 
-            <li class="list-group-item" ng-repeat="car in carReturning">
+            <li class="list-group-item animated bounceInRight" ng-repeat="car in carReturning">
                 {{car.type.manufacturer}} {{car.type.model}} - {{car.type.year}}
                 <span class="badge">{{car.returning}}</span></li>
         </ul>
