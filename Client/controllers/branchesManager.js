@@ -12,7 +12,7 @@ carentApp.controller('branchesManager', [
         $scope.currentBranch = $scope.defaultBranch;
 
         $scope.isCollapsed = true;
-        $scope.buttonText = 'הוסף סניף';
+        $scope.buttonText = 'Add Branch >>';
 
 
         $scope.resetForm = function()
@@ -25,11 +25,11 @@ carentApp.controller('branchesManager', [
         $scope.setCurrentMode = function (isEdit){
             if (isEdit)
             {
-                $scope.buttonText = 'ערוך סניף';
+                $scope.buttonText = 'Edit Branch >>';
             }
             else
             {
-                $scope.buttonText = 'הוסף סניף';
+                $scope.buttonText = 'Add Branch >>';
             }
         };
 
@@ -91,6 +91,7 @@ carentApp.controller('branchesManager', [
 
                 $scope.markers.splice(indexSaver, 1);
             };
+            var currInfoWindow;
 
             $scope.upsertMarker = function (info, exists){
                 if (!exists) {
@@ -106,8 +107,8 @@ carentApp.controller('branchesManager', [
 
                     var htmlElement = '<div id=infowin><h2>' + marker.title + '</h2>' +
                         '<br/>' +
-                        '<button id=edit ng-click=editBranch("' + info._id + '")> Edit </button>' +
-                        '<button id=delete ng-click=deleteBranch("' + info._id + '")> Delete </button></div>';
+                        '<button id=edit class="btn btn-default" ng-click=editBranch("' + info._id + '")> Edit </button>' +
+                        '<button id=delete class="btn btn-default" ng-click=deleteBranch("' + info._id + '")> Delete </button></div>';
                     var compiled = $compile(htmlElement)($scope);
                     var infoWindow = new google.maps.InfoWindow({
                         map: map,
@@ -118,7 +119,14 @@ carentApp.controller('branchesManager', [
                     marker.infoWindow = infoWindow;
 
                     google.maps.event.addListener(marker, 'click', function () {
+                        if (currInfoWindow)
+                        {
+                            currInfoWindow.close();
+                        }
+
                         infoWindow.open($scope.map, marker);
+
+                        currInfoWindow = infoWindow;
                     });
 
                     $scope.markers.push(marker);
@@ -137,8 +145,8 @@ carentApp.controller('branchesManager', [
 
                     var htmlElement = '<div id=infowin><h2>' + existingMarker.title + '</h2>' +
                         '<br/>' +
-                        '<button id=edit ng-click=editBranch("' + info._id + '")> Edit </button>' +
-                        '<button id=delete ng-click=deleteBranch("' + info._id + '")> Delete </button></div>';
+                        '<button id=edit class="btn btn-default" ng-click=editBranch("' + info._id + '")> Edit </button>' +
+                        '<button id=delete class="btn btn-default" ng-click=deleteBranch("' + info._id + '")> Delete </button></div>';
                     var compiled = $compile(htmlElement)($scope);
                     var infoWindow = new google.maps.InfoWindow({
                         map: map,

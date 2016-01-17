@@ -1,6 +1,6 @@
-<div ng-controller="branchesManager" class="jumbotron" dir="rtl">
+<div ng-controller="branchesManager" class="jumbotron" style="height: 600px;">
     <h2>
-        סניפים
+        Branches
     </h2>
 
     <script>
@@ -12,46 +12,109 @@
 
     <style>
 
-        #map_canvas img {
-            max-width: none;
-        }
-
         #branchDetails table {
             border-spacing: 1px;
             border-collapse: separate;
         }
 
+        #markers_list ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #markers_list li {
+            font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
+            border-bottom: 1px solid #ccc;
+        }
+
+        #markers_list li:last-child {
+            border: none;
+        }
+
+        #markers_list li a {
+            text-decoration: none;
+            display: block;
+            width: 200px;
+
+            -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+            -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+            -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+            -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+            transition: font-size 0.3s ease, background-color 0.3s ease;
+        }
+
+        #markers_list li a:hover {
+            font-size: 30px;
+            background: #f6f6f6;
+        }
+
+        #modify {
+            margin-right: 58%;
+            margin-top: 15%;
+        }
+
+
     </style>
-    <div id="map_canvas" style="height: 600px; width: 500px; float:left;">
+
+    <div id="markers_list" style="float:left;">
+        <table>
+            <tbody>
+            <tr>
+
+                <td rowspan="2">
+                    <div id="map_canvas" style="width: 388px; height: 447px; float:left;">
+                    </div>
+                </td>
+                <td width="80%" valign="top" style="padding-left:10px">
+                    <ul>
+                        <div id="class" ng-repeat="marker in markers | orderBy : 'title'">
+                            <li><a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a></li>
+                        </div>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-left:10px">
+                    <button id="add_branch" class="btn btn-default" ng-click="resetForm()" ng-bind="buttonText">
+                    </button>
+                    <div id="branchDetails" collapse="isCollapsed">
+                        <div class="row">
+                            <form ng-submit="upsertBranch()" >
+                                <div class="col-lg-3">
+                                    <label for="branchTitle" class="float-left">Title:</label>
+                                    <input id="branchTitle" type="text" class="form-control ng-pristine ng-untouched ng-valid" placeholder="Title" ng-model="currentBranch.title">
+                                </div>
+                                <div class="col-lg-3">
+                                    <label for="branchLat" class="float-left">Lat:</label>
+                                    <input id="branchLat" type="text" class="form-control ng-pristine ng-untouched ng-valid" placeholder="33" ng-model="currentBranch.lat">
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <label for="branchLong" class="float-left">Long:</label>
+                                    <input id="branchLong" type="text" class="form-control ng-pristine ng-untouched ng-valid" placeholder="33" ng-model="currentBranch.long">
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <button id="modify" class="btn btn-primary" type="submit">
+                                        שלח
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
     </div>
-    <table>
-        <tr>
-            <td>
-                <div id="class" ng-repeat="marker in markers | orderBy : 'title'">
-                    <a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a>
-                </div>
-            </td>
-            <td>
-                <button id="add_branch" class="btn btn-default" ng-click="resetForm()" ng-bind="buttonText">
-                </button>
-            </td>
-        </tr>
-    </table>
-    <div id="branchDetails" collapse="isCollapsed">
-        <div class="form-horizontal">
-            <form ng-submit="upsertBranch()">
-                <input type="hidden" ng-model="currentBranch._id">
-                שם:
-                <br>
-                <input type="text" ng-model="currentBranch.title"><br>
-                Lat:
-                <br>
-                <input type="text" ng-model="currentBranch.lat">
-                Long:
-                <br>
-                <input type="text" ng-model="currentBranch.long">
-                <button type="submit">שלח </button>
-            </form>
-        </div>
+
+
+
+
+    <div style="float:left">
+
     </div>
+
 </div>
