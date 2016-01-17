@@ -9,7 +9,22 @@ var Car = require('../models/Car');
 
 
 exports.carsByCategory = function (req, res) {
-    Car.find().exec(function(error,cars){
-        res.json(cars);
+    Car.aggregate([
+        {
+            $group: {
+                _id: '$category',
+                carsCount: { $sum: 1 }
+            }
+        }
+        ],
+        function(err, carsByCat) {
+            if (!err)
+            {
+                res.json(carsByCat);
+            }
+            else
+            {
+
+            }
     });
 };
