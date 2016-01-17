@@ -50,7 +50,10 @@ carentApp.controller('carsAvailable', ['$scope', '$uibModal', 'OrderService', 'c
         //socket.emit('newScreen', { "screen_id": screen_id});
     });
     socket.on('newOrder', function(data) {
-        $scope.orders.push(data);
+        var order = angular.copy(data);
+        order.car = {};
+        order.car._id = data.car;
+        $scope.orders.push(order);
         organizeData();
         $scope.$apply();
     });

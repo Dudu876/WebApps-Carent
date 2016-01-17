@@ -25,8 +25,8 @@ carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, c
     };
 
     $scope.ok = function () {
-        $scope.dates.start = $('#startDate').val();
-        $scope.dates.end = $('#endDate').val();
+        $scope.dates.start = new Date($('#startDate').val());
+        $scope.dates.end = new Date($('#endDate').val());
         var order = {
             startDate: $scope.dates.start,
             endDate: $scope.dates.end,
