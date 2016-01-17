@@ -6,6 +6,7 @@ var path = require('path');
 var carController = require('./controllers/Cars');
 var orderController = require('./controllers/Orders');
 var branchController = require('./controllers/Branches');
+var statisticsController = require('./controllers/Statistics');
 
 module.exports = function (app) {
 
@@ -35,6 +36,8 @@ module.exports = function (app) {
     app.route('/api/orders/:order_id')
         .delete(orderController.deleteOrder);
 
+    app.route('/api/stats/carByCat')
+        .get(statisticsController.carsByCategory);
 
     // route to handle all angular requests
     app.get('/', function (req, res) {

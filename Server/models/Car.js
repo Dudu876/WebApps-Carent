@@ -12,7 +12,7 @@ var carSchema = new Schema({
     category: String,
     price: Number,
     gearbox: String,
-    branch: { type: Schema.Types.ObjectId, ref: 'branches' }
+    branch: { type: Schema.Types.ObjectId, ref: 'Branch' }
 });
 
 // define our car model
