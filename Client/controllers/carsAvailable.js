@@ -3,6 +3,7 @@
  */
 carentApp.controller('carsAvailable', ['$scope', '$uibModal', 'OrderService', 'carFactory', function ($scope, $uibModal, OrderService, carFactory) {
 
+    $scope.categories = ["","A","B","C","D"];
     $scope.carReturning = [];
     carFactory.get().success(function (response) {
         $scope.cars = response;
@@ -13,6 +14,8 @@ carentApp.controller('carsAvailable', ['$scope', '$uibModal', 'OrderService', 'c
     });
 
     function organizeData() {
+        if ($scope.orders === undefined)
+            return 0;
         $scope.orders.forEach(function (element, index, array) {
             var orderedCar = getCarByNumber($scope.cars, element.car._id)[0];
             if (orderedCar !== undefined) {
@@ -42,6 +45,12 @@ carentApp.controller('carsAvailable', ['$scope', '$uibModal', 'OrderService', 'c
     function deleteCarByNumber(cars, id) {
         return cars.filter(function (car) {
             return car._id !== id;
+        });
+    }
+
+    $scope.searchCar = function(){
+        carFactory.searchCar($scope.searchCarObj).success(function(res){
+            $scope.cars = res;
         });
     }
 
