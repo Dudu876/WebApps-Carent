@@ -34,8 +34,8 @@ exports.createOrder = function (req, res) {
     var order = new Order();
     order.startDate = req.body.startDate;
     order.endDate = req.body.endDate;
-    order.carNumber = req.body.carNumber;
     order.price = req.body.price;
+    order.car = req.body.car_id;
 
     order.save(function (err) {
         if (!err) {

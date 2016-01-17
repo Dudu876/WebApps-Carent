@@ -30,7 +30,7 @@ carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, c
         var order = {
             startDate: $scope.dates.start,
             endDate: $scope.dates.end,
-            carNumber: $scope.carNumber,
+            car_id: $scope.car._id,
             price: $scope.price
         };
         $uibModalInstance.close(order);
