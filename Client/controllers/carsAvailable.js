@@ -3,6 +3,7 @@
  */
 carentApp.controller('carsAvailable', ['$scope', '$uibModal', 'OrderService', 'carFactory', function ($scope, $uibModal, OrderService, carFactory) {
 
+    $scope.categories = ["","A","B","C","D"];
     $scope.carReturning = [];
     carFactory.get().success(function (response) {
         $scope.cars = response;
@@ -13,10 +14,12 @@ carentApp.controller('carsAvailable', ['$scope', '$uibModal', 'OrderService', 'c
     });
 
     function organizeData() {
+        if ($scope.orders === undefined)
+            return 0;
         $scope.orders.forEach(function (element, index, array) {
-            var orderedCar = getCarByNumber($scope.cars, element.carNumber)[0];
+            var orderedCar = getCarByNumber($scope.cars, element.car._id)[0];
             if (orderedCar !== undefined) {
-                $scope.cars = deleteCarByNumber($scope.cars, element.carNumber);
+                $scope.cars = deleteCarByNumber($scope.cars, element.car._id);
                 orderedCar.returning = "";
                 var now = new Date();
                 var diffDays = 0;
@@ -33,15 +36,21 @@ carentApp.controller('carsAvailable', ['$scope', '$uibModal', 'OrderService', 'c
         });
     }
 
-    function getCarByNumber(cars, number) {
+    function getCarByNumber(cars, id) {
         return cars.filter(function (car) {
-            return car.number === number;
+            return car._id === id;
         });
     }
 
-    function deleteCarByNumber(cars, number) {
+    function deleteCarByNumber(cars, id) {
         return cars.filter(function (car) {
-            return car.number !== number;
+            return car._id !== id;
+        });
+    }
+
+    $scope.searchCar = function(){
+        carFactory.searchCar($scope.searchCarObj).success(function(res){
+            $scope.cars = res;
         });
     }
 
@@ -50,7 +59,10 @@ carentApp.controller('carsAvailable', ['$scope', '$uibModal', 'OrderService', 'c
         //socket.emit('newScreen', { "screen_id": screen_id});
     });
     socket.on('newOrder', function(data) {
-        $scope.orders.push(data);
+        var order = angular.copy(data);
+        order.car = {};
+        order.car._id = data.car;
+        $scope.orders.push(order);
         organizeData();
         $scope.$apply();
     });
