@@ -29,7 +29,7 @@ carentApp.controller('rentStatistics', ['$scope', 'OrderService', 'carFactory',
 
                 for (i = 0; i < orders.length; i++)
                 {
-                    var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                    var timeDiff = Math.abs(orders[i].getTime() - date1.getTime());
                     var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
                     var currentCar = $.grep(cars, function(e){ return e.number == orders.number; })[0];
                     if(!totalCategoryTimeOfRent[currentCar.category])

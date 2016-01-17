@@ -21,6 +21,9 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
         .when('/Statistics', {
             templateUrl: 'views/rentStatistics.html',
             controller: 'rentStatistics'
+        })
+        .when('/support', {
+            templateUrl: 'views/support.html'
         });
 
     $locationProvider.html5Mode(true);
