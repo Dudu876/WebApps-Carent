@@ -9,7 +9,6 @@ carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, c
     $scope.price = car.price;
     $scope.dates = {};
 
-
     $scope.today = function() {
         var today = new Date();
         var tomorrow = new Date();
@@ -25,8 +24,8 @@ carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, c
     };
 
     $scope.ok = function () {
-        $scope.dates.start = new Date($('#startDate').val());
-        $scope.dates.end = new Date($('#endDate').val());
+        $scope.dates.start = new Date($('#startDate').val()).toISOString();
+        $scope.dates.end = new Date($('#endDate').val()).toISOString();
         var order = {
             startDate: $scope.dates.start,
             endDate: $scope.dates.end,
