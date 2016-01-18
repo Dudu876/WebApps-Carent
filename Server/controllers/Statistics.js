@@ -28,3 +28,30 @@ exports.carsByCategory = function (req, res) {
             }
     });
 };
+
+exports.rentTimeByCategory = function (req, res){
+    Order.find().populate('car').exec(function (err, orders) {
+        if (!err) {
+            var categoryRentTime = {};
+
+            for (var index = 0; index < orders.length; index++)
+            {
+                var timeDiff = Math.abs(orders[index].startDate.getTime() - orders[index].endDate.getTime());
+                var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                if (!categoryRentTime[orders[index].car.category]) {
+                    categoryRentTime[orders[index].car.category] = diffDays;
+                }
+                else
+                {
+                    categoryRentTime[orders[index].car.category] += diffDays;
+                }
+            }
+
+            res.json(categoryRentTime);
+        }
+        else {
+            //Utils.generateResponse(req, res, 0, err);
+        }
+    });
+}

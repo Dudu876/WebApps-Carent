@@ -39,6 +39,9 @@ module.exports = function (app) {
     app.route('/api/stats/carByCat')
         .get(statisticsController.carsByCategory);
 
+    app.route('/api/stats/rentTimeByCat')
+        .get(statisticsController.rentTimeByCategory);
+
     // route to handle all angular requests
     app.get('/', function (req, res) {
         res.sendFile('index.html', {root: path.join(__dirname, '../Client')}); // load our public/index.html file
