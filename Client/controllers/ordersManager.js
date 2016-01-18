@@ -3,11 +3,13 @@
  */
 carentApp.controller('ordersManager', ['$scope', 'OrderService', function ($scope, OrderService) {
 
+    var FORMAT = "DD/MM/YYYY HH:mm";
+
     OrderService.get().success(function (response) {
         $scope.orders = response;
         $scope.orders.forEach(function (element, index, array) {
-            element.startDate = moment(element.startDate).format("MM/DD/YYYY HH:mm")
-            element.endDate = moment(element.endDate).format("MM/DD/YYYY HH:mm")
+            element.startDate = moment(element.startDate).format(FORMAT)
+            element.endDate = moment(element.endDate).format(FORMAT)
         });
     });
 

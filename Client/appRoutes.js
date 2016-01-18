@@ -28,6 +28,9 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
         })
         .when('/support', {
             templateUrl: 'views/support.html'
+        })
+        .otherwise({
+            redirectTo: '/'
         });
 
     $locationProvider.html5Mode(true);

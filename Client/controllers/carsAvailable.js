@@ -20,6 +20,7 @@ carentApp.controller('carsAvailable', ['$scope', '$uibModal', 'OrderService', 'c
             var orderedCar = getCarByNumber($scope.cars, element.car._id)[0];
             if (orderedCar !== undefined) {
                 $scope.cars = deleteCarByNumber($scope.cars, element.car._id);
+                orderedCar.order_id = element._id;
                 orderedCar.returning = "";
                 var now = new Date();
                 var diffDays = 0;
@@ -59,10 +60,16 @@ carentApp.controller('carsAvailable', ['$scope', '$uibModal', 'OrderService', 'c
     });
     socket.on('newOrder', function(data) {
         var order = angular.copy(data);
-        order.car = {};
-        order.car._id = data.car;
-        $scope.orders.push(order);
-        organizeData();
+        if (moment().isBetween(order.startDate, order.endDate)) {
+            order.car = {};
+            order.car._id = data.car;
+            $scope.orders.push(order);
+            organizeData();
+            $scope.$apply();
+        }
+    });
+    socket.on('deleteOrder', function(data) {
+        $scope.carReturning = $scope.carReturning.filter(function (car) { return car.order_id !== data });
         $scope.$apply();
     });
 

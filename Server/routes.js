@@ -43,7 +43,7 @@ module.exports = function (app) {
         .get(statisticsController.rentTimeByCategory);
 
     // route to handle all angular requests
-    app.get('/', function (req, res) {
+    app.get('*', function (req, res) {
         res.sendFile('index.html', {root: path.join(__dirname, '../Client')}); // load our public/index.html file
     });
 };

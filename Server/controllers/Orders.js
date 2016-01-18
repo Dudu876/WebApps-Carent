@@ -7,7 +7,7 @@ var Order = require('../models/Order');
 
 
 exports.getOrders = function (req, res) {
-    if (req.query.active) {
+    if (JSON.parse(req.query.active)) {
         var now = new Date();
         Order.find({startDate: {$lte: now}, endDate: {$gte: now}}).populate('car').exec(function (err, orders) {
             if (!err) {
@@ -52,6 +52,7 @@ exports.deleteOrder = function (req, res) {
     Order.remove({_id: req.params.order_id}, function (err) {
         if (!err) {
             res.json('order deleted');
+            server.io.sockets.emit('deleteOrder', req.params.order_id);
         }
         else {
             //Utils.generateResponse(req, res, 0, err);
