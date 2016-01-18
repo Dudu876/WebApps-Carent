@@ -11,8 +11,8 @@ carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, c
 
     $scope.today = function() {
         //$scope.dates.start = moment().format('DD/MM/YYYY, HH:mm:ss');
-        $scope.dates.start = moment().format("MM/DD/YYYY hh:mm A")
-        $scope.dates.end = moment().add(1, 'days').format("MM/DD/YYYY hh:mm A");
+        $scope.dates.start = moment().format("DD/MM/YYYY HH:mm");
+        $scope.dates.end = moment().add(1, 'days').format("DD/MM/YYYY HH:mm");
     };
     $scope.today();
 

@@ -2,7 +2,6 @@
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th>Order ID</th>
             <th>Car Number</th>
             <th>Car Category</th>
             <th>Price</th>
@@ -13,7 +12,6 @@
         </thead>
         <tbody>
         <tr ng-repeat="order in orders">
-            <td>{{ order._id }}</td>
             <td>{{ order.car.number }}</td>
             <td>{{ order.car.category }}</td>
             <td>{{ order.price }}</td>
