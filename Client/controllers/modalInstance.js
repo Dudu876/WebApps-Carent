@@ -10,11 +10,9 @@ carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, c
     $scope.dates = {};
 
     $scope.today = function() {
-        var today = new Date();
-        var tomorrow = new Date();
-        $scope.dates.start = new Date().toLocaleString();
-        tommorow = tomorrow.setDate(today.getDate() + 1);
-        $scope.dates.end = tomorrow.toLocaleString();
+        //$scope.dates.start = moment().format('DD/MM/YYYY, HH:mm:ss');
+        $scope.dates.start = moment().format("MM/DD/YYYY hh:mm A")
+        $scope.dates.end = moment().add(1, 'days').format("MM/DD/YYYY hh:mm A");
     };
     $scope.today();
 
@@ -24,8 +22,8 @@ carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, c
     };
 
     $scope.ok = function () {
-        $scope.dates.start = new Date($('#startDate').val()).toISOString();
-        $scope.dates.end = new Date($('#endDate').val()).toISOString();
+        $scope.dates.start = moment($('#startDate').val()).toISOString();
+        $scope.dates.end = moment($('#endDate').val()).toISOString();
         var order = {
             startDate: $scope.dates.start,
             endDate: $scope.dates.end,
