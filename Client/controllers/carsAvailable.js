@@ -56,7 +56,6 @@ carentApp.controller('carsAvailable', ['$scope', '$uibModal', 'OrderService', 'c
 
     var socket = io.connect('http://localhost:8080');
     socket.on('connect', function (data) {
-        //socket.emit('newScreen', { "screen_id": screen_id});
     });
     socket.on('newOrder', function(data) {
         var order = angular.copy(data);

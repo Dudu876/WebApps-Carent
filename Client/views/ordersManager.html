@@ -1,0 +1,27 @@
+<div class="jumbotron text-center" ng-init="init()">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Car Number</th>
+            <th>Car Category</th>
+            <th>Price</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="order in orders">
+            <td>{{ order._id }}</td>
+            <td>{{ order.car.number }}</td>
+            <td>{{ order.car.category }}</td>
+            <td>{{ order.price }}</td>
+            <td>{{ order.startDate }}</td>
+            <td>{{ order.endDate }}</td>
+            <td><button type="button" class="btn btn-primary" ng-click="deleteOrder(order._id)">Delete</button></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>

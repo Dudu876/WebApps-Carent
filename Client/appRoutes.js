@@ -14,6 +14,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             templateUrl: 'views/carsManager.html',
             controller: 'carsManager'
         })
+        .when('/OrdersManager', {
+            templateUrl: 'views/ordersManager.html',
+            controller: 'ordersManager'
+        })
         .when('/Branches', {
             templateUrl: 'views/branchesManager.html',
             controller: 'branchesManager'

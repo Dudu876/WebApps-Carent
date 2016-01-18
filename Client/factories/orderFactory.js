@@ -9,6 +9,7 @@ carentApp.factory('OrderService', ['$http', function($http) {
             return $http.get('/api/orders', {params: {active:false}});
         },
 
+        // get all orders that that are relevant now (that we are between the start and the end date)
         getActive : function() {
             return $http.get('/api/orders', {params: {active:true}});
         },
@@ -19,7 +20,7 @@ carentApp.factory('OrderService', ['$http', function($http) {
             return $http.post('/api/orders', orderDara);
         },
 
-        // call to DELETE a car
+        // call to DELETE a order
         delete : function(id) {
             return $http.delete('/api/orders/' + id);
         }
