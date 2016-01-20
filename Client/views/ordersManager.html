@@ -3,7 +3,7 @@
         <thead>
         <tr>
             <th>Car Number</th>
-            <th>Car Category</th>
+            <th>Car</th>
             <th>Price</th>
             <th>Start Date</th>
             <th>End Date</th>
@@ -13,7 +13,7 @@
         <tbody>
         <tr ng-repeat="order in orders">
             <td>{{ order.car.number }}</td>
-            <td>{{ order.car.category }}</td>
+            <td>{{ order.car.type.manufacturer }} {{ order.car.type.model }} - {{ order.car.type.year }}</td>
             <td>{{ order.price }}</td>
             <td>{{ order.startDate }}</td>
             <td>{{ order.endDate }}</td>
