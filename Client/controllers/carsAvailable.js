@@ -1,7 +1,7 @@
 /**
  * Created by Dudu on 30/12/2015.
  */
-carentApp.controller('carsAvailable', ['$scope', '$uibModal', 'OrderService', 'carFactory', function ($scope, $uibModal, OrderService, carFactory) {
+carentApp.controller('carsAvailable', ['$scope', '$location', '$uibModal', 'OrderService', 'carFactory', function ($scope, $location, $uibModal, OrderService, carFactory) {
 
     $scope.categories = ["","A","B","C","D"];
     $scope.carReturning = [];
@@ -55,7 +55,8 @@ carentApp.controller('carsAvailable', ['$scope', '$uibModal', 'OrderService', 'c
         });
     }
 
-    var socket = io.connect('http://localhost:5000');
+    var connection = $location.protocol() + '://' + $location.host() + ':' + $location.port();
+    var socket = io.connect(connection);
     socket.on('connect', function (data) {
     });
     socket.on('newOrder', function(data) {

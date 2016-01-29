@@ -94,7 +94,7 @@ exports.createCar = function (req, res) {
     car.category = req.body.category;
     car.price = req.body.price;
     car.gearbox = req.body.gearbox;
-    car.branch = req.body.branch;
+    car.branch = req.body.branch._id;
 
     car.save(function (err) {
         if (!err) {

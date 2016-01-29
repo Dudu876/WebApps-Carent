@@ -10,16 +10,17 @@ var routes = require('./routes');
 
 var app = express();
 var port = process.env.PORT || 5000;
-var server = app.listen(process.env.PORT || 5000);
+var server = app.listen(5000);
 console.log('Listening to port ' + port)
 io = socket.listen(server);
 exports.io = io;
 
 // config files
-var db = require('./config/db');
+//var db = require('./config/db');
+var db = process.env.DB || 'mongodb://localhost:27017/carent';
 
 // connect to our mongoDB database
-mongoose.connect(db.url);
+mongoose.connect(db);
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, '../Client/public', 'images', 'favicon.ico')));
