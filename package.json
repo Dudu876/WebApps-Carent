@@ -24,6 +24,10 @@
     "type": "git",
     "url": "git+https://github.com/Dudu876/WebApps-Carent.git"
   },
+  "engines": {
+    "node": "5.1.0",
+	"npm": "3.3.x"
+  }
   "keywords": [
     "heroku"
   ],
