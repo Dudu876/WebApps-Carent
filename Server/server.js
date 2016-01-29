@@ -10,7 +10,7 @@ var routes = require('./routes');
 
 var app = express();
 var port = process.env.PORT || 5000;
-var server = app.listen(5000);
+var server = app.listen(port);
 console.log('Listening to port ' + port)
 io = socket.listen(server);
 exports.io = io;
