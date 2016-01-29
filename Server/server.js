@@ -9,8 +9,9 @@ var socket = require('socket.io');
 var routes = require('./routes');
 
 var app = express();
-var server = app.listen(8080);
-console.log('Listening to port 8080')
+var port = process.env.PORT || 5000;
+var server = app.listen(process.env.PORT || 5000);
+console.log('Listening to port ' + port)
 io = socket.listen(server);
 exports.io = io;
 

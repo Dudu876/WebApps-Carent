@@ -55,7 +55,7 @@ carentApp.controller('carsAvailable', ['$scope', '$uibModal', 'OrderService', 'c
         });
     }
 
-    var socket = io.connect('http://localhost:8080');
+    var socket = io.connect('http://localhost:5000');
     socket.on('connect', function (data) {
     });
     socket.on('newOrder', function(data) {
