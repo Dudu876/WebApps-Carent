@@ -5,6 +5,7 @@ logs
 # Runtime data
 pids
 *.pid
+*.env
 *.seed
 .idea/workspace.xml
 .idea\runConfigurations\bin_www.xml
@@ -27,4 +28,4 @@ build/Release
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
-./idea/workspace.xml
+/Server/node_modules
