@@ -4,7 +4,7 @@
     </div>
     <div class="">
         <div class="panel-body">
-            <!--<div class="row">
+            <div class="row">
                 <label >Filters:</label>
                 <div class="">
                     <div class="form-group col-md-3">
@@ -16,40 +16,15 @@
                     <div class="form-group col-md-3">
                         <input class="form-control input-sm" placeholder="Gearbox" ng-model="search.gearbox"  type="text">
                     </div>
-                    <button class="btn btn-primary" ng-click="search()">
-                        Filter
-                    </button>
-                    &lt;!&ndash;<div class="form-group col-md-12">&ndash;&gt;
-                        &lt;!&ndash;<input class="form-control input-sm" placeholder="Anything" ng-model="search" type="text">&ndash;&gt;
-                    &lt;!&ndash;</div>&ndash;&gt;
-                </div>
-            </div>-->
-            <div class="row">
-                <div class="col-lg-3">
-                    <label for="carNumberSelect" class="float-left">Car number</label>
-                    <input id="carNumberSelect" type="text" class="form-control" placeholder="Car number" ng-model="searchCarObj.number">
-                </div>
-                <div class="col-lg-3">
-                    <label for="carModelSelect" class="float-left">Model</label>
-                    <input id="carModelSelect" type="text" class="form-control" placeholder="Model" ng-model="searchCarObj.model">
-                </div>
-                <div class="col-lg-3">
-
-                    <label for="carCategorySelect" class="float-left">Category</label>
-                    <select id="carCategorySelect" class="form-control" placeholder="Category" ng-model="searchCarObj.category">
-                        <option ng-repeat="category in categories"  value="{{category}}">{{ category }}</option>
-                    </select>
-                </div>
-                <div class="col-lg-3">
-                    <br>
-                    <button id="searchCar" style="margin-top: 5px;" type="button" class="btn btn-default hvr-sweep-to-bottom" ng-click="searchCar()">
-                        Search Car
-                    </button>
+                    <!--<div class="form-group col-md-12">-->
+                        <!--<input class="form-control input-sm" placeholder="Anything" ng-model="search" type="text">-->
+                    <!--</div>-->
                 </div>
             </div>
             <hr>
             <div class="row">
-                <div class="col-sm-6 " ng-repeat="car in cars"> <!--| filter:search-->
+                <h4 ng-hide="cars.length">No Available Cars!</h4>
+                <div class="col-sm-6 " ng-repeat="car in cars | filter:search" > <!--| filter:search-->
                     <div class="thumbnail carbox animated bounceInUp" ng-click="openModal('',car)">
                         <h3> {{car.type.manufacturer}} {{car.type.model}}
                             <small> {{car.type.year}}</small>
@@ -68,8 +43,8 @@
         <h4>Cars Returning</h4>
     </div>
     <div class="panel-body">
+        <h5 ng-hide="carReturning.length">All Cars are Available!</h5>
         <ul class="list-group">
-
             <li class="list-group-item animated bounceInRight" ng-repeat="car in carReturning">
                 {{car.type.manufacturer}} {{car.type.model}} - {{car.type.year}}
                 <span class="badge">{{car.returning}}</span></li>
