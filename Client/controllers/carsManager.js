@@ -6,7 +6,7 @@ carentApp.controller('carsManager', function($scope, $uibModal, $log, carFactory
     $scope.cars = [];
     $scope.branches = [];
     $scope.updateMode = "";
-    $scope.categories = ["","A","B","C","D"];
+    $scope.categories = ["","A","B","C","D","E","F","G"];
     var isUpdateMode = false;
     var updateMode = "Adding new car";
     $scope.showModal = false;
@@ -165,7 +165,7 @@ carentApp.controller('carsManager', function($scope, $uibModal, $log, carFactory
 
 
 carentApp.controller('ModalInstanceCtrlCar', function ($scope, $uibModalInstance, branchService, _id ,number, manufacturer,model,year,category,price,gearbox,branch,updateMode) {
-    $scope.categories = ["","A","B","C","D"];
+    $scope.categories = ["","A","B","C","D","E","F","G"];
     $scope.gearboxes = ["","Manual","Automatic","Robotics"];
     $scope.currCar = {
         _id: _id,

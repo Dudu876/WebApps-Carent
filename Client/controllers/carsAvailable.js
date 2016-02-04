@@ -3,7 +3,7 @@
  */
 carentApp.controller('carsAvailable', ['$scope', '$location', '$uibModal', 'OrderService', 'carFactory', function ($scope, $location, $uibModal, OrderService, carFactory) {
 
-    $scope.categories = ["","A","B","C","D"];
+    $scope.categories = ["","A","B","C","D","E","F","G"];
     $scope.carReturning = [];
     carFactory.get().success(function (response) {
         $scope.cars = response;
