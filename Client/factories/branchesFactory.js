@@ -3,6 +3,8 @@
  */
 carentApp.factory('branchService', ['$http', function($http) {
 
+    var _selectedBranch;
+
     return {
         // call to get all branches
         get : function() {
@@ -17,6 +19,8 @@ carentApp.factory('branchService', ['$http', function($http) {
         // call to DELETE a car
         delete : function(id) {
             return $http.delete('/api/branch/' + id);
-        }
+        },
+
+        selectedBranch : _selectedBranch
     }
 }]);

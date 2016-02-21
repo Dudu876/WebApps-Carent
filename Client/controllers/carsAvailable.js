@@ -1,7 +1,7 @@
 /**
  * Created by Dudu on 30/12/2015.
  */
-carentApp.controller('carsAvailable', ['$scope', '$location', '$uibModal', 'OrderService', 'carFactory', function ($scope, $location, $uibModal, OrderService, carFactory) {
+carentApp.controller('carsAvailable', ['$scope', '$location', '$uibModal', 'OrderService', 'carFactory', 'branchService', function ($scope, $location, $uibModal, OrderService, carFactory, branchService) {
 
     $scope.categories = ["","A","B","C","D","E","F","G"];
     $scope.carReturning = [];
@@ -12,6 +12,14 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$uibModal', 'Orde
             organizeData();
         });
     });
+
+    $scope.search = {};
+    $scope.search.branch = {};
+    $scope.$watch( function() { return branchService.selectedBranch} , function(newVal,oldVal) {
+        console.log('changed ' + newVal + ' from ' + oldVal);
+        $scope.search.branch.title = branchService.selectedBranch;
+    });
+
 
     function organizeData() {
         if ($scope.orders === undefined)
