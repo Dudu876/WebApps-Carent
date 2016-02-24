@@ -1,4 +1,4 @@
 /**
  * Created by Dudu on 30/12/2015.
  */
-var carentApp = angular.module('carentApp', ['ngRoute', 'appRoutes','ui.bootstrap']).constant('FORMAT', "DD/MM/YYYY HH:mm");
+var carentApp = angular.module('carentApp', ['ngRoute', 'appRoutes', 'tien.clndr', 'ui.bootstrap']).constant('FORMAT', "DD/MM/YYYY HH:mm");

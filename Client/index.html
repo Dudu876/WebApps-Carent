@@ -12,14 +12,19 @@
     <link rel="stylesheet" href="public/libs/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
     <link rel="stylesheet" href="public/libs/jquery-ui-1.11.4/jquery-ui.min.css">
     <link rel="stylesheet" href="public/stylesheets/style.css">
+
+    <link rel="stylesheet" href="public/libs/angular-clndr/angular-clndr.css">
+
     <link rel="stylesheet" href="public/libs/hover.css/hover-min.css" >
+    <link rel="stylesheet" href="public/libs/jquery-ui-1.11.4/jquery-ui.min.css" >
     <link rel="stylesheet" href="public/font/fonts.css" ><!-- custom styles -->
 
     <!-- JS -->
     <script src="public/libs/jquery/dist/jquery.min.js"></script>
+    <script src="public/libs/jquery-ui-1.11.4/jquery-ui.min.js"></script>
     <script src="public/libs/moment/min/moment.min.js"></script>
     <script src="public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="public/libs/angular/angular.min.js"></script>
+    <script src="public/libs/angular/angular.js"></script>
     <script src="public/libs/angular-route/angular-route.min.js"></script>
     <script src="public/libs/ui.bootstrap/ui-bootstrap-tpls-0.14.3.min.js"></script>
     <script src="public/libs/socket.io-client/socket.io.js"></script>
@@ -27,13 +32,18 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpkTgTR--qces2l4LuT35p1todOQcimJg" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
     <script src="public/libs/d3/d3pie.min.js"></script>
-    <script src="public/libs/moment/min/moment.min.js"></script>
     <script src="public/libs/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+
+    <script src="public/libs/clndr/clndr.min.js"></script>
+    <script src="public/libs/angular-clndr/angular-clndr.js"></script>
 
     <!-- ANGULAR CUSTOM -->
     <script src="app.js"></script>
     <script src="appRoutes.js"></script>
     <script src="controllers/carsAvailable.js"></script>
+
+    <script src="controllers/responsive-calendar.js"></script>
+
     <script src="controllers/carsManager.js"></script>
     <script src="controllers/ordersManager.js"></script>
     <script src="controllers/branchesManager.js"></script>
@@ -49,29 +59,38 @@
 </head>
 <body ng-app="carentApp">
 <!-- HEADER -->
-<nav class="navbar hidden-tablet hidden-phone navbar navbar-inverse collapsed" ng-controller="navCtrl">
+<nav class="navbar navbar-inverse" ng-controller="navCtrl">
     <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
         <a class="navbar-brand" href="/">Carent</a>
     </div>
 
     <!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
-    <ul class="nav navbar-nav">
-        <li><a href="/CarsManager">Cars</a></li>
-        <li><a href="/OrdersManager">Orders</a></li>
-        <li><a href="/Branches">Branches</a></li>
-        <li><a href="/Statistics">Statistics</a></li>
-        <li><a href="/support">Support</a></li>
-        <li role="presentation" class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-               {{selectedBranch}} <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-                <li ng-repeat="branch in branches">
-                    <a href="" ng-click="changeBranch(branch)">{{branch.title}}</a>
-                </li>
-            </ul>
-        </li>
-    </ul>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li><a href="/Calendar">Calendar</a></li>
+            <li><a href="/CarsManager">Cars</a></li>
+            <li><a href="/OrdersManager">Orders</a></li>
+            <li><a href="/Branches">Branches</a></li>
+            <li><a href="/Statistics">Statistics</a></li>
+            <li><a href="/support">Support</a></li>
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                   {{selectedBranch}} <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li ng-repeat="branch in branches">
+                        <a href="" ng-click="changeBranch(branch)">{{branch.title}}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 
     <!--<form class="navbar-form navbar-left" role="search">-->
         <!--<div class="form-group">-->

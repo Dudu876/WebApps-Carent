@@ -6,6 +6,7 @@ carentApp.controller('navCtrl', function($scope, $log, carFactory, branchService
         $scope.branches = response;
         branchService.selectedBranch = $scope.branches[1].title;
         $scope.selectedBranch = branchService.selectedBranch;
+        branchService.allBranches = $scope.branches;
     });
 
      $scope.selectedBranch = branchService.selectedBranch;

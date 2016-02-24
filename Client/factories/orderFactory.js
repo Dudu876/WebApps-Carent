@@ -2,7 +2,6 @@
  * Created by Dudu on 05/01/2016.
  */
 carentApp.factory('OrderService', ['$http', function($http) {
-
     return {
         // call to get all orders
         get : function() {

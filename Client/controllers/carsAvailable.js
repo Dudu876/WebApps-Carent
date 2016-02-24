@@ -16,10 +16,8 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$uibModal', 'Orde
     $scope.search = {};
     $scope.search.branch = {};
     $scope.$watch( function() { return branchService.selectedBranch} , function(newVal,oldVal) {
-        console.log('changed ' + newVal + ' from ' + oldVal);
         $scope.search.branch.title = branchService.selectedBranch;
     });
-
 
     function organizeData() {
         if ($scope.orders === undefined)

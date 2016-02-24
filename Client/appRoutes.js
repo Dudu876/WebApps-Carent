@@ -10,6 +10,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             controller: 'carsAvailable'
         })
         // cars page that will use the CarsController
+        .when('/Calendar', {
+            templateUrl: 'views/calender.html',
+            controller: 'caleController'
+        })
         .when('/CarsManager', {
             templateUrl: 'views/carsManager.html',
             controller: 'carsManager'

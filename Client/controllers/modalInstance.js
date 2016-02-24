@@ -5,6 +5,8 @@
 carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, car) {
 
     var FORMAT = "DD/MM/YYYY HH:mm";
+    //var missions = ["השכרה","טיפול","תאונה","לא זמין"];
+    var missions = ["Rent","Treatment","Accident","Not available"];
 
     $scope.init = function () {
         $('.datetimepicker1').datetimepicker({format: FORMAT});
@@ -14,6 +16,8 @@ carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, c
     $scope.carNumber = car.number;
     $scope.price = car.price;
     $scope.dates = {};
+    $scope.missions = missions;
+    $scope.mission = $scope.missions[0];
 
     $scope.today = function() {
         $scope.dates.start = moment().format(FORMAT);
@@ -33,7 +37,8 @@ carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, c
             startDate: $scope.dates.start,
             endDate: $scope.dates.end,
             car_id: $scope.car._id,
-            price: $scope.price
+            price: $scope.price,
+            mission: $scope.mission
         };
         $uibModalInstance.close(order);
     };

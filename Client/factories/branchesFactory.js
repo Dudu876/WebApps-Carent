@@ -4,6 +4,7 @@
 carentApp.factory('branchService', ['$http', function($http) {
 
     var _selectedBranch;
+    var _allBrunches;
 
     return {
         // call to get all branches
@@ -21,6 +22,28 @@ carentApp.factory('branchService', ['$http', function($http) {
             return $http.delete('/api/branch/' + id);
         },
 
-        selectedBranch : _selectedBranch
+        selectedBranch : _selectedBranch,
+        allBranches : _allBrunches,
+
+        getBranchName : function(branchId) {
+            if (this.allBranches === undefined) {
+                $http.get('/api/branch/').success(function(data){
+                    _allBrunches = data;
+
+                    var branch = this.allBranches.filter(function (branch) {
+                        return branch._id === branchId;
+                    });
+
+                    return branch[0].title;
+                });
+            }
+            else {
+                var branch = this.allBranches.filter(function (branch) {
+                    return branch._id === branchId;
+                });
+
+                return branch[0].title;
+            }
+        }
     }
 }]);
