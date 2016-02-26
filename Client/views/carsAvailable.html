@@ -23,8 +23,8 @@
             </div>
             <hr>
             <div class="row">
-                <h4 ng-hide="cars.length">No Available Cars!</h4>
-                <div class="col-sm-6 " ng-repeat="car in cars | filter:search" > <!--| filter:search-->
+                <h4 ng-hide="freeCars.length">No Available Cars!</h4>
+                <div class="col-sm-6 " ng-repeat="car in freeCars | filter:search" > <!--| filter:search-->
                     <div class="thumbnail carbox animated bounceInUp" ng-click="openModal('',car)">
                         <h3> {{car.type.manufacturer}} {{car.type.model}}
                             <small> {{car.type.year}}</small>
@@ -39,15 +39,48 @@
     </div>
 </div>
 <aside class="col-md-4 panel">
-    <div class="panel-heading panel-default">
-        <h4>Cars Returning</h4>
+    <div>
+        <div class="panel-heading panel-default">
+            <h4>Cars Returning</h4>
+        </div>
+        <div class="panel-body">
+            <h5 ng-hide="carReturning.length">All Cars are Available!</h5>
+            <ul class="list-group">
+                <li class="list-group-item animated bounceInRight"
+                    ng-repeat="car in carReturning | filter:{ branch: search.branch } | orderBy: 'hours'">
+                    {{car.type.manufacturer}} {{car.type.model}} - {{car.mission}}
+                    <span class="badge">{{car.returning}}</span></li>
+            </ul>
+        </div>
     </div>
-    <div class="panel-body">
-        <h5 ng-hide="carReturning.length">All Cars are Available!</h5>
-        <ul class="list-group">
-            <li class="list-group-item animated bounceInRight" ng-repeat="car in carReturning | filter:{ branch: search.branch }">
-                {{car.type.manufacturer}} {{car.type.model}} - {{car.type.year}}
-                <span class="badge">{{car.returning}}</span></li>
-        </ul>
+    <div>
+        <tien-clndr class="clndr col-xs-12" tien-clndr-object="clndr" tien-clndr-events="events">
+            <div class="clndr-controls">
+                <div class="clndr-previous-button" ng-click="clndr.back()">
+                    &lsaquo;
+                </div>
+                <div class="month">
+                    {{month}}
+                </div>
+                <div class="clndr-next-button" ng-click="clndr.forward()">
+                    &rsaquo;
+                </div>
+            </div>
+            <div class="clndr-grid">
+                <div class="days-of-the-week">
+                    <div class="header-day" ng-repeat="day in options.daysOfTheWeek track by $index">
+                        {{day}}
+                    </div>
+                </div>
+                <div class="days">
+                    <div class="{{day.classes}} pointer"
+                         ng-class="{'dudu-selected': selectedDay.day == day.day}"
+                         ng-repeat="day in days" ng-click="showEvents(day)">
+                        <div class="event-indicator" ng-show="day.events.length">{{day.events.length}}</div>
+                        {{day.day}}
+                    </div>
+                </div>
+            </div>
+        </tien-clndr>
     </div>
 </aside>

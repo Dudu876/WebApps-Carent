@@ -24,9 +24,9 @@ carentApp.controller('caleController', ['$scope', '$http', 'OrderService', 'bran
         });
     });
 
-    $scope.showEvents = function(events) {
+    $scope.showEvents = function(day) {
         //alert(events.map(function(e) { return e.title }).join("\n"));
-        $scope.dayEvents = events;
+        $scope.dayEvents = day.events;
+        $scope.selectedDay = day.day;
     };
-
 }]);

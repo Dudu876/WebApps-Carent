@@ -9,6 +9,16 @@ nav {
   background-color: #2b3e50;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
+.dudu-selected {
+    background-color: #F3F4F5;
+}
+.dudu-height {
+    height: 50%;
+}
 .carbox {
     padding: 20px;
     text-align: center;

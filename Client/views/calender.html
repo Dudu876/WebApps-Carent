@@ -17,8 +17,10 @@
             </div>
         </div>
         <div class="days">
-            <div class="{{day.classes}}" ng-repeat="day in days">
-                <div class="event-indicator" ng-show="day.events.length" ng-click="showEvents(day.events)">{{day.events.length}}</div>
+            <div class="{{day.classes}} pointer"
+                 ng-class="{'dudu-selected': selectedDay == day.day}"
+                 ng-repeat="day in days" ng-click="showEvents(day)">
+                <div class="event-indicator" ng-show="day.events.length">{{day.events.length}}</div>
                 {{day.day}}
             </div>
         </div>
