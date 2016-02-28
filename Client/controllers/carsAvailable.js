@@ -42,6 +42,8 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$uibModal', 'Orde
                 orderedCar.order_id = element._id;
                 orderedCar.returning = "";
                 orderedCar.mission = element.mission;
+                orderedCar.phone = element.phone;
+                orderedCar.client_name = element.client_name;
                 //var now = new Date();
                 var now = $scope.selectedDay.date;
                 var diffDays = 0;
@@ -123,6 +125,10 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$uibModal', 'Orde
             //event.title = car.type.manufacturer + ' ' + car.type.model + ' - ' + car.type.year + ' (' + car.branch + ')';
             $scope.events.push(event);
         });
+    }
+
+    $scope.showClient = function(car) {
+        alert(car.client_name + ' - ' + car.phone);
     };
 
     $scope.showEvents = function(day) {

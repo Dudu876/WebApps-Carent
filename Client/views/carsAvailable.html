@@ -46,8 +46,9 @@
         <div class="panel-body returning">
             <h5 ng-hide="(carReturning | filter:{ branch: search.branch }).length">All Cars are Available!</h5>
             <ul class="list-group">
-                <li class="list-group-item animated bounceInRight"
-                    ng-repeat="car in carReturning | filter:{ branch: search.branch } | orderBy: 'hours'">
+                <li class="list-group-item animated bounceInRight pointer"
+                    ng-repeat="car in carReturning | filter:{ branch: search.branch } | orderBy: 'hours'"
+                    ng-click="showClient(car)">
                     {{car.type.manufacturer}} {{car.type.model}} - {{car.mission}}
                     <span class="badge">{{car.returning}}</span></li>
             </ul>
