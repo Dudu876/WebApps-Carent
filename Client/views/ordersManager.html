@@ -4,10 +4,12 @@
         <tr>
             <th>Car Number</th>
             <th>Car</th>
-            <th>Price</th>
+            <th>Branch</th>
             <th>Start Date</th>
             <th>End Date</th>
             <th>Mission</th>
+            <th>Name</th>
+            <th>Phone</th>
             <th></th>
         </tr>
         </thead>
@@ -15,10 +17,12 @@
         <tr ng-repeat="order in orders">
             <td>{{ order.car.number }}</td>
             <td>{{ order.car.type.manufacturer }} {{ order.car.type.model }} - {{ order.car.type.year }}</td>
-            <td>{{ order.price }}</td>
+            <td>{{ order.car.branch }}</td>
             <td>{{ order.startDate }}</td>
             <td>{{ order.endDate }}</td>
             <td>{{ order.mission }}</td>
+            <td>{{ order.client_name }}</td>
+            <td>{{ order.phone }}</td>
             <td><button type="button" class="btn btn-primary" ng-click="deleteOrder(order._id)">Delete</button></td>
         </tr>
         </tbody>
