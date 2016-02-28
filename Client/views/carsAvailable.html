@@ -22,8 +22,8 @@
                 </div>
             </div>
             <hr>
-            <div class="row">
-                <h4 ng-hide="freeCars.length">No Available Cars!</h4>
+            <div class="row available">
+                <h4 ng-hide="(freeCars | filter:search).length">No Available Cars!</h4>
                 <div class="col-sm-6 " ng-repeat="car in freeCars | filter:search" > <!--| filter:search-->
                     <div class="thumbnail carbox animated bounceInUp" ng-click="openModal('',car)">
                         <h3> {{car.type.manufacturer}} {{car.type.model}}
@@ -39,12 +39,12 @@
     </div>
 </div>
 <aside class="col-md-4 panel">
-    <div>
+    <div class="">
         <div class="panel-heading panel-default">
             <h4>Cars Returning</h4>
         </div>
-        <div class="panel-body">
-            <h5 ng-hide="carReturning.length">All Cars are Available!</h5>
+        <div class="panel-body returning">
+            <h5 ng-hide="(carReturning | filter:{ branch: search.branch }).length">All Cars are Available!</h5>
             <ul class="list-group">
                 <li class="list-group-item animated bounceInRight"
                     ng-repeat="car in carReturning | filter:{ branch: search.branch } | orderBy: 'hours'">

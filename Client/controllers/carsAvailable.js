@@ -86,6 +86,7 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$uibModal', 'Orde
     });
     socket.on('newOrder', function(data) {
         var order = angular.copy(data);
+        $scope.allOrders.push(order);
         if (moment().isBetween(order.startDate, order.endDate)) {
             order.car = {};
             order.car._id = data.car;
@@ -130,6 +131,7 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$uibModal', 'Orde
         var tempday = angular.copy(day);
         //$scope.selectedDay.date.add(2, 'hours'); // @dudu
         //$scope.selectedDay.date = day.date.add(2,'hours');
+        $scope.selectedDay = tempday;
         $scope.selectedDay.date = tempday.date.add(2,'hours');
         if (day.date.get('date') == moment().get('date')) $scope.selectedDay.date = moment().add(2,'hours');
         //$scope.selectedDay.date.utcOffset('+0200');

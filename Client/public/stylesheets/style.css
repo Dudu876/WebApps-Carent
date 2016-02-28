@@ -16,14 +16,22 @@ nav {
 .dudu-selected {
     background-color: #F3F4F5;
 }
-.dudu-height {
-    height: 50%;
-}
+
 .carbox {
-    padding: 20px;
+    padding: 0px;
     text-align: center;
     cursor: pointer;
     border-radius: 10px;
+}
+
+.returning {
+    height: 26vh;
+    overflow-y: auto;
+}
+
+.available {
+    height: 51vh;
+    overflow-y: auto;
 }
 
 .footer {

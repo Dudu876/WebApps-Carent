@@ -14,7 +14,6 @@ carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, c
 
     $scope.car = car;
     $scope.carNumber = car.number;
-    $scope.price = car.price;
     $scope.dates = {};
     $scope.missions = missions;
     $scope.mission = $scope.missions[0];
@@ -37,7 +36,6 @@ carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, c
             startDate: $scope.dates.start,
             endDate: $scope.dates.end,
             car_id: $scope.car._id,
-            price: $scope.price,
             mission: $scope.mission
         };
         $uibModalInstance.close(order);
