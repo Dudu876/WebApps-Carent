@@ -38,7 +38,9 @@ carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, c
             startDate: $scope.dates.start,
             endDate: $scope.dates.end,
             car_id: $scope.car._id,
-            mission: $scope.mission
+            mission: $scope.mission,
+            client_name: $scope.client_name,
+            phone: $scope.phone
         };
         $uibModalInstance.close(order);
     };

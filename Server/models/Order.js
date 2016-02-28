@@ -10,8 +10,9 @@ var orderSchema = new Schema({
     startDate: Date,
     endDate: Date,
     car: {type: Schema.Types.ObjectId, ref: 'Car' },
-    price: Number,
-    mission: String
+    mission: String,
+    client_name: String,
+    phone: String
 });
 
 // define our order model

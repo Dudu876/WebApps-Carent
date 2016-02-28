@@ -33,6 +33,16 @@
                     <option ng-repeat="mission in missions" value="{{mission}}">{{ mission }}</option>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="client_name">Client's name</label>
+                <input type="text" class="form-control" id="client_name" placeholder="Client's name"
+                       ng-model="client_name">
+            </div>
+            <div class="form-group">
+                <label for="phone">Client's phone</label>
+                <input type="text" class="form-control" id="phone" placeholder="Client's phone"
+                       ng-model="phone">
+            </div>
         </form>
     </div>
 </div>

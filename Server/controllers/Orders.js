@@ -22,16 +22,6 @@ exports.getOrders = function (req, res) {
     else {
         Order.find().populate('car').exec(function (err, orders) {
             if (!err) {
-                //var cars = orders.map(function(order) {
-                //    return order._doc.car;
-                //});
-                //
-                //Car.populate(cars, {
-                //    path: 'branch',
-                //    select: 'title'
-                //}, function(err,b) {
-                //    var s = b;
-                //});
                 res.json(orders);
             }
             else {
@@ -45,9 +35,10 @@ exports.createOrder = function (req, res) {
     var order = new Order();
     order.startDate = req.body.startDate;
     order.endDate = req.body.endDate;
-    order.price = req.body.price;
     order.mission = req.body.mission;
     order.car = req.body.car_id;
+    order.client_name = req.body.client_name;
+    order.phone = req.body.phone;
 
     order.save(function (err) {
         if (!err) {
