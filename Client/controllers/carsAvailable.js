@@ -4,8 +4,8 @@
 carentApp.controller('carsAvailable', ['$scope', '$location', '$uibModal', 'OrderService', 'carFactory', 'branchService', function ($scope, $location, $uibModal, OrderService, carFactory, branchService) {
 
     $scope.selectedDay = {};
-    $scope.selectedDay.date = moment().add(2,'hours'); //@dudu
-    //$scope.selectedDay.date = moment();
+    //$scope.selectedDay.date = moment().add(2,'hours'); //@dudu
+    $scope.selectedDay.date = moment();
     $scope.search = {};
     $scope.search.branch = {};
     $scope.categories = ["","A","B","C","D","E","F","G"];
@@ -47,16 +47,17 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$uibModal', 'Orde
                 var diffDays = 0;
                 //var diffHours = Math.round((Date.parse(element.endDate) - now.getTime()) / 3600000);
                 //if (now.isBefore(moment(element.endDate).add(2,'hours'))) {
-                    var diffHours = Math.round(moment(element.endDate).add(2, 'hours').diff(now, 'minutes') / 60);
-                    orderedCar.hours = diffHours;
-                    if (diffHours > 24) {
-                        diffDays = Math.floor(diffHours / 24);
-                        diffHours = diffHours % 24;
-                        orderedCar.returning =
-                            diffDays.toString() + ((diffDays == 1) ? ' day ' : ' days ');
-                    }
-                    orderedCar.returning += (diffHours.toString() + ((diffHours == 1) ? ' hour' : ' hours'));
-                    $scope.carReturning.push(orderedCar);
+                //var diffHours = Math.round(moment(element.endDate).add(2, 'hours').diff(now, 'minutes') / 60);
+                var diffHours = Math.round(moment(element.endDate).diff(now, 'minutes') / 60);
+                orderedCar.hours = diffHours;
+                if (diffHours > 24) {
+                    diffDays = Math.floor(diffHours / 24);
+                    diffHours = diffHours % 24;
+                    orderedCar.returning =
+                        diffDays.toString() + ((diffDays == 1) ? ' day ' : ' days ');
+                }
+                orderedCar.returning += (diffHours.toString() + ((diffHours == 1) ? ' hour' : ' hours'));
+                $scope.carReturning.push(orderedCar);
                 //}
             }
         });
@@ -132,14 +133,15 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$uibModal', 'Orde
         //$scope.selectedDay.date.add(2, 'hours'); // @dudu
         //$scope.selectedDay.date = day.date.add(2,'hours');
         $scope.selectedDay = tempday;
-        $scope.selectedDay.date = tempday.date.add(2,'hours');
-        if (day.date.get('date') == moment().get('date')) $scope.selectedDay.date = moment().add(2,'hours');
+        //$scope.selectedDay.date = tempday.date.add(2,'hours');
+        //if (day.date.get('date') == moment().get('date')) $scope.selectedDay.date = moment().add(2,'hours');
+        if (day.date.get('date') == moment().get('date')) $scope.selectedDay.date = moment();
         //$scope.selectedDay.date.utcOffset('+0200');
         $scope.orders = getActiveOrders($scope.allOrders, $scope.selectedDay.date);
         organizeData();
     };
 
-    $scope.openModal = function (size, car) {
+    $scope.openModal = function (size, car, date) {
 
         var modalInstance = $uibModal.open({
             animation: true,
@@ -149,6 +151,9 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$uibModal', 'Orde
             resolve: {
                 car: function () {
                     return car;
+                },
+                date: function () {
+                    return date;
                 }
             }
         });

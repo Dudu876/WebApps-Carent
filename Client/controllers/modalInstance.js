@@ -2,7 +2,7 @@
  * Created by Dudu on 06/01/2016.
  */
 
-carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, car) {
+carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, car, date) {
 
     var FORMAT = "DD/MM/YYYY HH:mm";
     //var missions = ["השכרה","טיפול","תאונה","לא זמין"];
@@ -19,8 +19,8 @@ carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, c
     $scope.mission = $scope.missions[0];
 
     $scope.today = function() {
-        $scope.dates.start = moment().format(FORMAT);
-        $scope.dates.end = moment().add(1, 'days').format(FORMAT);
+        $scope.dates.start = date.format(FORMAT);
+        $scope.dates.end = date.add(1, 'days').format(FORMAT);
     };
     $scope.today();
 
@@ -30,8 +30,10 @@ carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, c
     };
 
     $scope.ok = function () {
-        $scope.dates.start = moment($('#startDate').val(), FORMAT).toISOString();
-        $scope.dates.end = moment($('#endDate').val(), FORMAT).toISOString();
+        //$scope.dates.start = moment($('#startDate').val(), FORMAT).toISOString();
+        //$scope.dates.end = moment($('#endDate').val(), FORMAT).toISOString();
+        $scope.dates.start = moment($('#startDate').val(), FORMAT).format();
+        $scope.dates.end = moment($('#endDate').val(), FORMAT).format();
         var order = {
             startDate: $scope.dates.start,
             endDate: $scope.dates.end,

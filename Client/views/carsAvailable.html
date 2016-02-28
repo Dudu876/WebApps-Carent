@@ -25,7 +25,7 @@
             <div class="row available">
                 <h4 ng-hide="(freeCars | filter:search).length">No Available Cars!</h4>
                 <div class="col-sm-6 " ng-repeat="car in freeCars | filter:search" > <!--| filter:search-->
-                    <div class="thumbnail carbox animated bounceInUp" ng-click="openModal('',car)">
+                    <div class="thumbnail carbox animated bounceInUp" ng-click="openModal('',car,selectedDay.date)">
                         <h3> {{car.type.manufacturer}} {{car.type.model}}
                             <small> {{car.type.year}}</small>
                         </h3>
