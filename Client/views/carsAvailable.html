@@ -48,9 +48,15 @@
             <ul class="list-group">
                 <li class="list-group-item animated bounceInRight pointer"
                     ng-repeat="car in carReturning | filter:{ branch: search.branch } | orderBy: 'hours'"
-                    ng-click="showClient(car)">
-                    {{car.type.manufacturer}} {{car.type.model}} - {{car.mission}}
-                    <span class="badge">{{car.returning}}</span></li>
+                    data-toggle="collapse"
+                    data-target="#client{{$index}}">
+                    {{car.type.manufacturer}} {{car.type.model}}
+                    <span class="badge">{{car.returning}}</span>
+                    <div class="collapse" id="client{{$index}}" style="margin-top: 7px;">
+                        {{car.client_name}} - {{car.phone}} <small>{{car.mission}}</small>
+                    </div>
+                </li>
+
             </ul>
         </div>
     </div>
