@@ -141,7 +141,9 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$uibModal', 'Orde
         $scope.selectedDay = tempday;
         //$scope.selectedDay.date = tempday.date.add(2,'hours');
         //if (day.date.get('date') == moment().get('date')) $scope.selectedDay.date = moment().add(2,'hours');
-        if (day.date.get('date') == moment().get('date')) $scope.selectedDay.date = moment();
+        if (day.date.get('date') == moment().get('date') && day.date.get('month') == moment().get('month')) {
+            $scope.selectedDay.date = moment();
+        }
         //$scope.selectedDay.date.utcOffset('+0200');
         $scope.orders = getActiveOrders($scope.allOrders, $scope.selectedDay.date);
         organizeData();
