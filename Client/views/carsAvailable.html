@@ -90,4 +90,10 @@
             </div>
         </tien-clndr>
     </div>
+    <uib-timepicker ng-model="selectedDay.date"
+                    ng-change="timeChanged()"
+                    hour-step="time.hstep" minute-step="time.mstep"
+                    show-meridian="ismeridian"
+                    style="margin:auto">
+    </uib-timepicker>
 </aside>
