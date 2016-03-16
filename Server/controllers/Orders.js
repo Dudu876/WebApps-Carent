@@ -47,6 +47,7 @@ exports.createOrder = function (req, res) {
         }
         else {
             //Utils.generateResponse(req, res, 0, err);
+            res.status(401).send(err.message);
         }
     });
 };

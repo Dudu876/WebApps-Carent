@@ -15,8 +15,8 @@ carentApp.factory('OrderService', ['$http', function($http) {
 
         // these will work when more API routes are defined on the Node side of things
         // call to POST and create a new car
-        create : function(orderDara) {
-            return $http.post('/api/orders', orderDara);
+        create : function(orderData) {
+            return $http.post('/api/orders', orderData);
         },
 
         // call to DELETE a order

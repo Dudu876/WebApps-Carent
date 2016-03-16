@@ -2,7 +2,7 @@
  * Created by Dudu on 06/01/2016.
  */
 
-carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, car, date) {
+carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, OrderService, car, date) {
 
     var FORMAT = "DD/MM/YYYY HH:mm";
     //var missions = ["השכרה","טיפול","תאונה","לא זמין"];
@@ -33,17 +33,22 @@ carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, c
     $scope.ok = function () {
         //$scope.dates.start = moment($('#startDate').val(), FORMAT).toISOString();
         //$scope.dates.end = moment($('#endDate').val(), FORMAT).toISOString();
-        $scope.dates.start = moment($('#startDate').val(), FORMAT).format();
-        $scope.dates.end = moment($('#endDate').val(), FORMAT).format();
+        var startDate = moment($('#startDate').val(), FORMAT).format();
+        var endDate = moment($('#endDate').val(), FORMAT).format();
         var order = {
-            startDate: $scope.dates.start,
-            endDate: $scope.dates.end,
+            startDate: startDate,
+            endDate: endDate,
             car_id: $scope.car._id,
             mission: $scope.mission,
             client_name: $scope.client_name,
             phone: $scope.phone
         };
-        $uibModalInstance.close(order);
+
+        OrderService.create(order).success(function(data){
+            $uibModalInstance.close();
+        }).error(function(data){
+            alert(data);
+        });
     };
 
     $scope.cancel = function () {

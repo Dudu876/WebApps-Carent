@@ -168,8 +168,7 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$timeout', '$uibM
             }
         });
 
-        modalInstance.result.then(function (order) {
-            OrderService.create(order);
+        modalInstance.result.then(function () {
         },
             function () {
         });
