@@ -4,6 +4,7 @@
 
 // grab the mongoose module
 var mongoose = require('mongoose');
+var ObjectId = mongoose.Types.ObjectId;
 var Schema = mongoose.Schema;
 
 var orderSchema = new Schema({
@@ -17,7 +18,7 @@ var orderSchema = new Schema({
 
 orderSchema.pre('save', function (next) {
     var self = this;
-    mongoose.models["Order"].findOne({ startDate: {$lte: self.endDate}, endDate: {$gte: self.startDate}}, function (err, order) {
+    mongoose.models["Order"].findOne({car: new ObjectId(self.car), startDate: {$lte: self.endDate}, endDate: {$gte: self.startDate}}, function (err, order) {
         if (order){
             next(new Error("There is an existing order for this car between " +
                 order.startDate.toLocaleString() + " - " + order.endDate.toLocaleString() +
