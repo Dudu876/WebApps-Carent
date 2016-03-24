@@ -22,7 +22,7 @@ orderSchema.pre('save', function (next) {
         if (order){
             next(new Error("There is an existing order for this car between " +
                 order.startDate.toLocaleString() + " - " + order.endDate.toLocaleString() +
-                " there for order was not created.\n\nPlease try other dates"));
+                " therefore the order was not created.\n\nPlease try other dates"));
         }else{
             next();
         }

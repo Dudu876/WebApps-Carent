@@ -27,6 +27,12 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$timeout', '$uibM
         });
     });
 
+    $scope.deleteOrder = function(id) {
+        OrderService.delete(id).success(function(data) {
+            alert("Order deleted");
+        });
+    };
+
     $scope.$watch( function() { return branchService.selectedBranch} , function(newVal,oldVal) {
         $scope.search.branch.title = branchService.selectedBranch;
     });
@@ -98,7 +104,10 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$timeout', '$uibM
         }
     });
     socket.on('deleteOrder', function(data) {
-        $scope.carReturning = $scope.carReturning.filter(function (car) { return car.order_id !== data });
+        //$scope.carReturning = $scope.carReturning.filter(function (car) { return car.order_id !== data });
+        $scope.allOrders = $scope.allOrders.filter(function (order) { return order._id !== data });
+        $scope.orders = $scope.orders.filter(function (order) { return order._id !== data });
+        organizeData();
         $scope.$apply();
     });
 

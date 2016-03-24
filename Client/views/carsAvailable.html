@@ -54,6 +54,7 @@
                     <span class="badge">{{car.returning}}</span>
                     <div class="collapse" id="client{{$index}}" style="margin-top: 7px;">
                         {{car.client_name}} - {{car.phone}} <small>{{car.mission}}</small>
+                        <button style="float: right;" type="button" ng-click="deleteOrder(car.order_id)" class="btn btn-primary btn-xs">Delete</button>
                     </div>
                 </li>
 
