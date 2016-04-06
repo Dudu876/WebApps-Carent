@@ -2,14 +2,14 @@
  * Created by Dudu on 05/01/2016.
  */
 
-var server = require('../server.js')
+var server = require('../server.js');
 var Order = require('../models/Order');
 var Branch = require('../models/Branch');
 var Car = require('../models/Car');
 
 exports.getOrders = function (req, res) {
+    var now = new Date();
     if (JSON.parse(req.query.active)) {
-        var now = new Date();
         Order.find({startDate: {$lte: now}, endDate: {$gte: now}}).populate('car').exec(function (err, orders) {
             if (!err) {
                 res.json(orders);
@@ -20,7 +20,7 @@ exports.getOrders = function (req, res) {
         });
     }
     else {
-        Order.find().populate('car').exec(function (err, orders) {
+        Order.find({endDate: {$gte: now}}).populate('car').exec(function (err, orders) {
             if (!err) {
                 res.json(orders);
             }
