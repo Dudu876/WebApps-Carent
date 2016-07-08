@@ -38,6 +38,7 @@ exports.createOrder = function (req, res) {
     order.endDate = req.body.endDate;
     order.mission = req.body.mission;
     order.car = req.body.car_id;
+    order.price = req.body.price;
     order.client_name = req.body.client_name;
     order.phone = req.body.phone;
 

@@ -41,6 +41,7 @@ carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, O
             car_id: $scope.car._id,
             mission: $scope.mission,
             client_name: $scope.client_name,
+            price: $scope.price,
             phone: $scope.phone
         };
 

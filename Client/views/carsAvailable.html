@@ -53,7 +53,7 @@
                     {{car.type.manufacturer}} {{car.type.model}}
                     <span class="badge">{{car.returning}}</span>
                     <div class="collapse" id="client{{$index}}" style="margin-top: 7px;">
-                        {{car.client_name}} - {{car.phone}} - {{car.price}}₪ <small>{{car.mission}}</small>
+                        {{car.client_name}} - {{car.phone}} - {{car.price}}₪ <small>{{car.mission}}</small> <br>
                         <button style="float: right;" type="button" ng-click="deleteOrder(car.order_id)" class="btn btn-primary btn-xs">Delete</button><br>
                         {{}}
                     </div>

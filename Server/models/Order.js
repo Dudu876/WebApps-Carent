@@ -12,6 +12,7 @@ var orderSchema = new Schema({
     endDate: Date,
     car: {type: Schema.Types.ObjectId, ref: 'Car' },
     mission: String,
+    price: Number,
     client_name: String,
     phone: String
 });

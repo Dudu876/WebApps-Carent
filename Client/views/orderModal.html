@@ -33,6 +33,12 @@
                     <option ng-repeat="mission in missions" value="{{mission}}">{{ mission }}</option>
                 </select>
             </div>
+
+            <div class="form-group">
+                <label for="carPriceInput" class="float-left">Price</label>
+                <input type="number" class="form-control" id="carPriceInput" placeholder="Price" ng-model="price">
+            </div>
+
             <div class="form-group">
                 <label for="client_name">Client's name</label>
                 <input type="text" class="form-control" id="client_name" placeholder="Client's name"

@@ -54,6 +54,7 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$timeout', '$uibM
                 orderedCar.mission = element.mission;
                 orderedCar.phone = element.phone;
                 orderedCar.client_name = element.client_name;
+                orderedCar.price = element.price;
                 var now = $scope.selectedDay.date;
                 var diffDays = 0;
                 var diffHours = Math.round(moment(element.endDate).diff(now, 'minutes') / 60);
