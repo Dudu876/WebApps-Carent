@@ -9,7 +9,6 @@ var Car = require('../models/Car');
 
 exports.getOrders = function (req, res) {
     var now = new Date();
-    var now = new Date();
     now.setDate(now.getDate() - 14);
     if (JSON.parse(req.query.active)) {
         Order.find({startDate: {$lte: now}, endDate: {$gte: now}}).populate('car').exec(function (err, orders) {
