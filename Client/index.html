@@ -16,7 +16,9 @@
     <link rel="stylesheet" href="public/libs/angular-clndr/angular-clndr.css">
 
     <link rel="stylesheet" href="public/libs/hover.css/hover-min.css" >
-    <link rel="stylesheet" href="public/libs/jquery-ui-1.11.4/jquery-ui.min.css" >
+    <link rel="stylesheet" href="public/libs/jquery-ui-1.11.4/jquery-ui.min.css">
+    <link rel="stylesheet" href="public/libs/daypilot/scheduler_traditional.css">
+
     <link rel="stylesheet" href="public/font/fonts.css" ><!-- custom styles -->
 
     <!-- JS -->
@@ -24,7 +26,8 @@
     <script src="public/libs/jquery-ui-1.11.4/jquery-ui.min.js"></script>
     <script src="public/libs/moment/min/moment.min.js"></script>
     <script src="public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="public/libs/angular/angular.js"></script>
+    <!--<script src="public/libs/angular/angular.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="public/libs/angular-route/angular-route.min.js"></script>
     <script src="public/libs/ui.bootstrap/ui-bootstrap-tpls-0.14.3.min.js"></script>
     <script src="public/libs/socket.io-client/socket.io.js"></script>
@@ -36,12 +39,14 @@
 
     <script src="public/libs/clndr/clndr.min.js"></script>
     <script src="public/libs/angular-clndr/angular-clndr.js"></script>
+    <script src="public/libs/daypilot/daypilot.js"></script>
 
     <!-- ANGULAR CUSTOM -->
     <script src="app.js"></script>
     <script src="appRoutes.js"></script>
     <script src="controllers/carsAvailable.js"></script>
     <script src="controllers/calendar.js"></script>
+    <script src="controllers/orderScheduler.js"></script>
     <script src="controllers/carsManager.js"></script>
     <script src="controllers/ordersManager.js"></script>
     <script src="controllers/branchesManager.js"></script>
@@ -71,6 +76,7 @@
     <!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
+            <li><a href="/Scheduler">Scheduler</a></li>
             <li><a href="/CarsManager">Cars</a></li>
             <li><a href="/OrdersManager">Orders</a></li>
             <li><a href="/Branches">Branches</a></li>

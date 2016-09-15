@@ -10,6 +10,7 @@
     "eonasdan-bootstrap-datetimepicker": "~4.17.37",
     "socket.io-client": "~1.4.1",
     "angular-clndr": "^0.3.2",
-    "clndr": "^1.4.1"
+    "clndr": "^1.4.1",
+    "daypilot": "*"
   }
 }

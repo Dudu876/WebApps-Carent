@@ -34,6 +34,7 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$timeout', '$uibM
     };
 
     $scope.$watch( function() { return branchService.selectedBranch} , function(newVal,oldVal) {
+        //the cars get filtered by angular filter in the html
         $scope.search.branch.title = branchService.selectedBranch;
     });
 
