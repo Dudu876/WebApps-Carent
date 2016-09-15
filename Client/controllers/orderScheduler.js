@@ -42,16 +42,16 @@ carentApp.controller('orderScheduler', ['$scope', 'OrderService', 'carFactory', 
                 maxDate = moment($scope.orders[i].endDate) > maxDate ? moment($scope.orders[i].startDate) : maxDate;
             }
 
-            minDate = minDate.subtract(7, 'days');
+            //minDate = minDate.subtract(7, 'days');
             $scope.config.startDate = new DayPilot.Date(minDate.toISOString());
-            $scope.config.days = maxDate.diff(minDate, 'days') + 14;
+            $scope.config.days = maxDate.diff(minDate, 'days') + 7;
         });
     });
 
     $scope.config = {
         scale: "Day",
         visible: true,
-        theme: "scheduler_default_2014",
+        theme: "scheduler_traditional",
         //days: new DayPilot.Date().daysInMonth(),
         days: 90,
         startDate: new DayPilot.Date().firstDayOfMonth(),
