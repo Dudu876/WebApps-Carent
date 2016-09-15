@@ -16,10 +16,6 @@ carentApp.controller('orderScheduler', ['$scope', 'OrderService', 'carFactory', 
 
     $scope.events = [];
 
-    $scope.click = function(){
-        console.log("sa");
-    };
-
     $scope.$watch( function() { return branchService.selectedBranch} , function(newVal,oldVal) {
         refresh();
     });
@@ -55,7 +51,7 @@ carentApp.controller('orderScheduler', ['$scope', 'OrderService', 'carFactory', 
     $scope.config = {
         scale: "Day",
         visible: true,
-        theme: "scheduler_traditional",
+        theme: "scheduler_default_2014",
         //days: new DayPilot.Date().daysInMonth(),
         days: 90,
         startDate: new DayPilot.Date().firstDayOfMonth(),
