@@ -16,6 +16,13 @@ carentApp.controller('orderScheduler', ['$scope', 'OrderService', 'carFactory', 
 
     $scope.events = [];
 
+    //$scope.scheduler.onBeforeCellRender = function(args) {
+    //    debugger;
+    //    if (args.cell.start <= DayPilot.Date.today() && DayPilot.Date.today() < args.cell.end) {
+    //        args.cell.backColor = "#ffcccc";
+    //    }
+    //};
+
     $scope.$watch( function() { return branchService.selectedBranch} , function(newVal,oldVal) {
         refresh();
     });
@@ -61,6 +68,11 @@ carentApp.controller('orderScheduler', ['$scope', 'OrderService', 'carFactory', 
             { groupBy: "Month" },
             { groupBy: "Day", format: "d" }
         ],
+        onBeforeCellRender: function(args) {
+            if (args.cell.start <= DayPilot.Date.today() && DayPilot.Date.today() < args.cell.end) {
+                args.cell.backColor = "#FF7F50";
+            }
+        },
         resources: []
     };
 
