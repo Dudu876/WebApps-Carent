@@ -3,25 +3,45 @@
  */
 carentApp.controller('orderScheduler', ['$scope', 'OrderService', 'carFactory', 'branchService', '$timeout', '$http', function ($scope, OrderService, carFactory, branchService, $timeout, $http) {
 
-    //var scheduler = new DayPilot.Scheduler("dp");
-    //scheduler.theme = "scheduler_traditional";
-    //scheduler.events.list = [
-    //    { id: 1, start: "2015-01-01T00:00:00", end: "2015-01-01T15:00:00", text: "Event 1", resource: "R1" }
-    //];
-    //scheduler.resources = [
-    //    { id: "R1", name: "Resource 1" }
-    //];
-    //scheduler.init();
-    //scheduler.scrollTo("2015-01-01");
-
     $scope.events = [];
 
-    //$scope.scheduler.onBeforeCellRender = function(args) {
-    //    debugger;
-    //    if (args.cell.start <= DayPilot.Date.today() && DayPilot.Date.today() < args.cell.end) {
-    //        args.cell.backColor = "#ffcccc";
-    //    }
-    //};
+    $scope.config = {
+        scale: "Day",
+        visible: true,
+        theme: "scheduler_traditional",
+        //days: new DayPilot.Date().daysInMonth(),
+        days: 90,
+        startDate: new DayPilot.Date().firstDayOfMonth(),
+        cellWidth: 20,
+        //cellWidthSpec: "Auto",
+        timeHeaders: [
+            { groupBy: "Month" },
+            { groupBy: "Day", format: "d" }
+        ],
+        onBeforeCellRender: onBeforeCellRender,
+        onEventMoved: onEventMoved,
+        resources: []
+    };
+
+    function onBeforeCellRender(args) {
+        if (args.cell.start <= DayPilot.Date.today() && DayPilot.Date.today() < args.cell.end) {
+            args.cell.backColor = "#FF7F50";
+        }
+    }
+
+    function onEventMoved(args) {
+        debugger;
+        var params = {
+            id: args.e.id(),
+            newStart: args.newStart.toString(),
+            newEnd: args.newEnd.toString(),
+            newResource: args.newResource
+        };
+        // need to create update option in the order factory
+        //$http.post("backend_move.php", params).success(function() {
+        //    $scope.scheduler.message("Moved.");
+        //});
+    }
 
     $scope.$watch( function() { return branchService.selectedBranch} , function(newVal,oldVal) {
         refresh();
@@ -55,26 +75,6 @@ carentApp.controller('orderScheduler', ['$scope', 'OrderService', 'carFactory', 
         });
     });
 
-    $scope.config = {
-        scale: "Day",
-        visible: true,
-        theme: "scheduler_traditional",
-        //days: new DayPilot.Date().daysInMonth(),
-        days: 90,
-        startDate: new DayPilot.Date().firstDayOfMonth(),
-        cellWidth: 20,
-        //cellWidthSpec: "Auto",
-        timeHeaders: [
-            { groupBy: "Month" },
-            { groupBy: "Day", format: "d" }
-        ],
-        onBeforeCellRender: function(args) {
-            if (args.cell.start <= DayPilot.Date.today() && DayPilot.Date.today() < args.cell.end) {
-                args.cell.backColor = "#FF7F50";
-            }
-        },
-        resources: []
-    };
 
     function refresh() {
         $scope.config.resources = [];
