@@ -33823,7 +33823,7 @@ if (typeof DayPilotScheduler === 'undefined') {
             var $8n = (end.getTime() - $K.getTime()) / (1000 * 60);
             if ($8n <= 1440) {
                 if ($i.viewType !== "Days" && !$i.businessWeekends) {
-                    if ($P.start.dayOfWeek() === 0 || $P.start.dayOfWeek() === 6) {
+                    if ($P.start.dayOfWeek() === 5 || $P.start.dayOfWeek() === 6) {
                         return false;
                     }
                 }
