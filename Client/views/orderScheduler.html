@@ -1,7 +1,47 @@
-<div>
-    <daypilot-scheduler id="scheduler" daypilot-config="config" daypilot-events="events" ></daypilot-scheduler>
+<toggle-switch
+        class="switch-large"
+        ng-model="switchStatus"
+        on-label="Custom"
+        off-label="All Events">
+
+</toggle-switch>
+<br>
+<div ng-show="switchStatus" class="form-group" style="width: 15%;display: flex;margin-top: 13px;">
+    <!--<label for="startDate">Start</label>-->
+    <!--<div class='input-group date datetimepicker1'>-->
+        <!--<input type='text' class="form-control" id="startDate" ng-model="dates.start"/>-->
+        <!--<span class="input-group-addon">-->
+            <!--<span class="glyphicon glyphicon-calendar"></span>-->
+        <!--</span>-->
+    <!--</div>-->
+    <!--<label for="endDate">End</label>-->
+    <!--<div class='input-group date datetimepicker1'>-->
+        <!--<input type='text' class="form-control" id="endDate" ng-model="dates.end"/>-->
+        <!--<span class="input-group-addon">-->
+            <!--<span class="glyphicon glyphicon-calendar"></span>-->
+        <!--</span>-->
+    <!--</div>-->
+
+    <div layout-gt-xs="row">
+        <div flex-gt-xs>
+            <h5>Start</h5>
+            <md-datepicker ng-model="dates.start" md-placeholder="Enter date"></md-datepicker>
+        </div>
+
+        <div flex-gt-xs>
+            <h5>End</h5>
+            <md-datepicker ng-model="dates.end" md-placeholder="Enter date"></md-datepicker>
+        </div>
+    </div>
+
+
+
 </div>
-<!--<div id="dp">-->
+
+<div style="margin-top: 10px;">
+    <daypilot-scheduler id="scheduler" daypilot-config="config" daypilot-events="events"></daypilot-scheduler>
+</div>
+<div ng-show="oldOrder" class="btn btn-danger" ng-click="undo()">Undo</div>
 
 <!--</div>-->
 <!--<div id="scheduler"></div>-->

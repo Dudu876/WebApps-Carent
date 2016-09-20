@@ -32,6 +32,19 @@ exports.getOrders = function (req, res) {
     }
 };
 
+exports.getOrder = function (req, res) {
+
+    Order.findById(req.params.order_id, function (err, order) {
+        if (!err) {
+            res.json(order);
+        }
+        else {
+            //Utils.generateResponse(req, res, 0, err);
+        }
+    });
+
+};
+
 exports.createOrder = function (req, res) {
     var order = new Order();
     order.startDate = req.body.startDate;
@@ -66,5 +79,27 @@ exports.deleteOrder = function (req, res) {
     });
 };
 
+exports.updateOrder = function (req, res) {
+    Order.findById(req.body.id, function (err, order) {
+        if (!err && order) {
+            order.startDate = req.body.startDate;
+            order.endDate = req.body.endDate;
+            order.car = req.body.car_id;
 
+            order.save(function (err) {
+                if (!err) {
+                    res.json('order updated');
+                    //server.io.sockets.emit('newOrder', order)
+                }
+                else {
+                    //Utils.generateResponse(req, res, 0, err);
+                    res.status(401).send(err.message);
+                }
+            });
 
+        }
+        else {
+            //Utils.generateResponse(req, res, 0, err);
+        }
+    });
+};

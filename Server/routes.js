@@ -31,9 +31,11 @@ module.exports = function (app) {
 
     app.route('/api/orders')
         .get(orderController.getOrders)
-        .post(orderController.createOrder);
+        .post(orderController.createOrder)
+        .put(orderController.updateOrder);
 
     app.route('/api/orders/:order_id')
+        .get(orderController.getOrder)
         .delete(orderController.deleteOrder);
 
     app.route('/api/stats/carByCat')

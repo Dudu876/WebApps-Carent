@@ -19,7 +19,7 @@ var orderSchema = new Schema({
 
 orderSchema.pre('save', function (next) {
     var self = this;
-    mongoose.models["Order"].findOne({car: new ObjectId(self.car), startDate: {$lte: self.endDate}, endDate: {$gte: self.startDate}}, function (err, order) {
+    mongoose.models["Order"].findOne({car: new ObjectId(self.car), _id: {$ne: new ObjectId(self._id)}, startDate: {$lte: self.endDate}, endDate: {$gte: self.startDate}}, function (err, order) {
         if (order){
             next(new Error("There is an existing order for this car between " +
                 order.startDate.toLocaleString() + " - " + order.endDate.toLocaleString() +
