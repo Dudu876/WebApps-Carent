@@ -1,7 +1,7 @@
 /**
  * Created by Dudu on 13/09/2016.
  */
-carentApp.controller('orderScheduler', ['$scope', 'OrderService', 'carFactory', 'branchService', '$timeout', '$http', function ($scope, OrderService, carFactory, branchService, $timeout, $http) {
+carentApp.controller('orderScheduler', ['$scope', 'OrderService', 'carFactory', 'branchService', '$uibModal', '$timeout', '$http', '$location', function ($scope, OrderService, carFactory, branchService, $uibModal, $timeout, $http, $location) {
 
     //var FORMAT = "DD/MM/YYYY HH:mm";
     var FORMAT = "DD/MM/YYYY";
@@ -19,10 +19,17 @@ carentApp.controller('orderScheduler', ['$scope', 'OrderService', 'carFactory', 
     var minDate = moment();
     var maxDate = moment();
 
+    var eventMenu = new DayPilot.Menu([
+        {text:"Delete Order", onclick: onContextDelete}]);
+    var selectionMenu = new DayPilot.Menu([
+        {text:"Create Order", onclick: onContextCreate}]);
+
     $scope.config = {
         scale: "Day",
         visible: true,
         theme: "scheduler_traditional",
+        contextMenu: eventMenu,
+        contextMenuSelection: selectionMenu,
         //days: new DayPilot.Date().daysInMonth(),
         days: 90,
         startDate: new DayPilot.Date().firstDayOfMonth(),
@@ -52,6 +59,47 @@ carentApp.controller('orderScheduler', ['$scope', 'OrderService', 'carFactory', 
 
     function onEventResized(args) {
         handleOrderChanged(args.e.id(), args.newStart, args.newEnd, args.e.resource());
+    }
+
+    function onContextCreate() {
+        var size = '';
+        var i = getIndexById($scope.cars, this.source.resource);
+        var date = moment(this.source.start.value);
+        var endDate = moment(this.source.end.value);
+        var car = $scope.cars[i];
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'views/orderModal.html',
+            controller: 'ModalInstanceCtrl',
+            size: size,
+            resolve: {
+                car: function () {
+                    return car;
+                },
+                date: function () {
+                    return date;
+                },
+                endDate: function () {
+                    return endDate
+                }
+            }
+        });
+
+        modalInstance.result.then(
+            function () {
+                console.log('order finished');
+
+            },
+            function () {
+                console.log('order dismissed');
+            }
+        );
+    }
+
+    function onContextDelete() {
+        OrderService.delete(this.source.value()).success(function(data) {
+            alert("Order deleted");
+        });
     }
 
     function handleOrderChanged(id, newStart,newEnd, car_id) {
@@ -117,6 +165,21 @@ carentApp.controller('orderScheduler', ['$scope', 'OrderService', 'carFactory', 
         console.log('changed');
     }, true);
 
+    var connection = $location.protocol() + '://' + $location.host() + ':' + $location.port();
+    var socket = io.connect(connection);
+    socket.on('connect', function (data) {
+    });
+    socket.on('newOrder', function(data) {
+        var order = angular.copy(data);
+        order.car = {};
+        order.car._id = data.car;
+        addOrder(order);
+    });
+    socket.on('deleteOrder', function(data) {
+        $scope.events = deleteOrderById($scope.events, data);
+        $scope.$apply();
+    });
+
     carFactory.get().success(function(cars) {
         $scope.cars = cars;
         refresh();
@@ -124,15 +187,7 @@ carentApp.controller('orderScheduler', ['$scope', 'OrderService', 'carFactory', 
         OrderService.get().success(function (orders) {
             $scope.orders = orders;
             for (var i in $scope.orders) {
-                var startTime = moment($scope.orders[i].startDate).format("HH:mm");
-                var endTime = moment($scope.orders[i].endDate).format("HH:mm");
-                $scope.events.push({
-                    "id": $scope.orders[i]._id,
-                    "text": startTime + ' - ' + $scope.orders[i].client_name + " ; " + $scope.orders[i].phone + ' - ' + endTime,
-                    "start": $scope.orders[i].startDate,
-                    "end": $scope.orders[i].endDate,
-                    "resource": $scope.orders[i].car._id
-                });
+                addOrder($scope.orders[i]);
                 minDate = moment($scope.orders[i].startDate) < minDate ? moment($scope.orders[i].startDate) : minDate;
                 maxDate = moment($scope.orders[i].endDate) > maxDate ? moment($scope.orders[i].endDate) : maxDate;
             }
@@ -142,6 +197,24 @@ carentApp.controller('orderScheduler', ['$scope', 'OrderService', 'carFactory', 
             $scope.config.days = maxDate.diff(minDate, 'days');
         });
     });
+
+    function addOrder(order) {
+        var startTime = moment(order.startDate).format("HH:mm");
+        var endTime = moment(order.endDate).format("HH:mm");
+        $scope.events.push({
+            "id": order._id,
+            "text": startTime + ' - ' + order.client_name + " ; " + order.phone + ' - ' + endTime,
+            "start": order.startDate,
+            "end": order.endDate,
+            "resource": order.car._id
+        });
+    }
+
+    function deleteOrderById(orders, id) {
+        return orders.filter(function (order) {
+            return order.id !== id;
+        });
+    }
 
     function refreshDates(minDate,maxDate) {
         $scope.config.startDate = new DayPilot.Date(minDate.toISOString());
@@ -167,7 +240,7 @@ carentApp.controller('orderScheduler', ['$scope', 'OrderService', 'carFactory', 
     }
     function getIndexById(array, id) {
         for (var i in array) {
-            if (array[i].id == id)
+            if (array[i].id == id || array[i]._id == id)
                 return i;
         }
     }

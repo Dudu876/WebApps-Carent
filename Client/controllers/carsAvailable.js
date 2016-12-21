@@ -21,7 +21,7 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$timeout', '$uibM
         $scope.allCars = response;
         OrderService.get().success(function (response) {
             $scope.allOrders = response;
-            $scope.orders = getActiveOrders($scope.allOrders, $scope.selectedDay.date);
+            //$scope.orders = getActiveOrders($scope.allOrders, $scope.selectedDay.date);
             organizeData();
             calendarEvents();
         });
@@ -39,6 +39,7 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$timeout', '$uibM
     });
 
     function organizeData() {
+        $scope.orders = getActiveOrders($scope.allOrders, $scope.selectedDay.date);
         $scope.carReturning = [];
         $scope.freeCars = $scope.allCars;
         if ($scope.orders === undefined || $scope.orders.length == 0) {
@@ -97,13 +98,13 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$timeout', '$uibM
     socket.on('newOrder', function(data) {
         var order = angular.copy(data);
         $scope.allOrders.push(order);
-        if (moment().isBetween(order.startDate, order.endDate)) {
+        //if (moment().isBetween(order.startDate, order.endDate)) {
             order.car = {};
             order.car._id = data.car;
-            $scope.orders.push(order);
+            //$scope.allOrders.push(order);
             organizeData();
             $scope.$apply();
-        }
+        //}
     });
     socket.on('deleteOrder', function(data) {
         //$scope.carReturning = $scope.carReturning.filter(function (car) { return car.order_id !== data });
@@ -142,14 +143,11 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$timeout', '$uibM
             $scope.selectedDay.date = moment();
             $scope.selectedDay.date.set('minute',0);
         }
-        $scope.orders = getActiveOrders($scope.allOrders, $scope.selectedDay.date);
         organizeData();
     };
 
     $scope.timeChanged = function() {
         $scope.selectedDay.date = moment($scope.selectedDay.date);
-        console.log($scope.selectedDay.date.toString());
-        $scope.orders = getActiveOrders($scope.allOrders, $scope.selectedDay.date);
         organizeData();
     };
 
@@ -175,6 +173,9 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$timeout', '$uibM
                 },
                 date: function () {
                     return date;
+                },
+                endDate: function () {
+                    return undefined;
                 }
             }
         });
@@ -182,7 +183,9 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$timeout', '$uibM
         modalInstance.result.then(function () {
         },
             function () {
-        });
+                console.log('order finished');
+            }
+        );
     };
 }]);
 

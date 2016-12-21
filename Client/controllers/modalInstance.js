@@ -2,7 +2,7 @@
  * Created by Dudu on 06/01/2016.
  */
 
-carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, OrderService, car, date) {
+carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, OrderService, car, date, endDate) {
 
     var FORMAT = "DD/MM/YYYY HH:mm";
     //var missions = ["השכרה","טיפול","תאונה","לא זמין"];
@@ -21,7 +21,7 @@ carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, O
     $scope.today = function() {
         var now = angular.copy(date);
         $scope.dates.start = now.format(FORMAT);
-        $scope.dates.end = now.add(1, 'days').format(FORMAT);
+        $scope.dates.end = (endDate == undefined) ? now.add(1, 'days').format(FORMAT) : endDate.format(FORMAT);
     };
     $scope.today();
 
@@ -46,7 +46,7 @@ carentApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, O
         };
 
         OrderService.create(order).success(function(data){
-            $uibModalInstance.close();
+            $uibModalInstance.close('ok');
         }).error(function(data){
             alert(data);
         });
