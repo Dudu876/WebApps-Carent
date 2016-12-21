@@ -30,7 +30,8 @@ carentApp.controller('orderScheduler', ['$scope', 'OrderService', 'carFactory', 
         //cellWidthSpec: "Auto",
         timeHeaders: [
             { groupBy: "Month" },
-            { groupBy: "Day", format: "d" }
+            { groupBy: "Day", format: "d" },
+            { groupBy: "Day", format: "ddd" }
         ],
         MessageBarPosition: "Bottom",
         onBeforeCellRender: onBeforeCellRender,
