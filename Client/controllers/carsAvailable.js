@@ -21,7 +21,6 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$timeout', '$uibM
         $scope.allCars = response;
         OrderService.get().success(function (response) {
             $scope.allOrders = response;
-            //$scope.orders = getActiveOrders($scope.allOrders, $scope.selectedDay.date);
             organizeData();
             calendarEvents();
         });
@@ -98,13 +97,19 @@ carentApp.controller('carsAvailable', ['$scope', '$location', '$timeout', '$uibM
     socket.on('newOrder', function(data) {
         var order = angular.copy(data);
         $scope.allOrders.push(order);
-        //if (moment().isBetween(order.startDate, order.endDate)) {
-            order.car = {};
-            order.car._id = data.car;
-            //$scope.allOrders.push(order);
-            organizeData();
-            $scope.$apply();
-        //}
+        order.car = {};
+        order.car._id = data.car;
+
+        var event = {};
+        event.date = moment(order.endDate).subtract(2,'hours').format(); //@dudu
+        event.mission = order.mission;
+        var car = getCarByNumber($scope.allCars, order.car._id)[0];
+        car.branch = car.branch.title;
+        event.car = car;
+        $scope.events.push(event);
+
+        organizeData();
+        $scope.$apply();
     });
     socket.on('deleteOrder', function(data) {
         //$scope.carReturning = $scope.carReturning.filter(function (car) { return car.order_id !== data });
