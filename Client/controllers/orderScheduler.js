@@ -41,6 +41,8 @@ carentApp.controller('orderScheduler', ['$scope', 'OrderService', 'carFactory', 
             { groupBy: "Day", format: "ddd" }
         ],
         MessageBarPosition: "Bottom",
+        rowMoveHandling: "Update",
+        //onRowMoved: onRowMoved,
         onBeforeCellRender: onBeforeCellRender,
         onEventMoved: onEventMoved,
         onEventResized: onEventResized,
